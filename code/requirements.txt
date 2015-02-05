@@ -1,0 +1,60 @@
+TSF1 Students need to be praised and reproached according their level and their goals. They must have a choice about how strict or lenient the system's feedback is.
+TSF2 Students must not be interrupted during the performance.
+TSF3 The system should be able to provide feedback even to an unfinished performance.
+TSF4 There must be annotations on students score with remarks or to outline some sections of the score because of frequent errors or due to some complexity, while they play or after they have finished their performance.
+TSF5 Teachers must have access to a pool of different icons to be used for annotations and also to be able to design their own icons for instrument-specific purposes. Additionally the idea of audio annotations was considered of great pedagogical value.
+PF1 The VEMUS performance evaluation should include the following elements: basic instrumental skills (attack, grisper fingering) basic musical skills (score reading, articulation, phrasing, score reading, rhythm, tempo) and in a more advanced level, skills on controlling the sound (intonation, squeaks, tone quality, air/finger)
+PF2 The system's performance feedback which should be consistent to what a real teacher would think about a performance.
+PF3 Teachers have to be able to adjust the criteria for evaluation making the feedback more "forgiving" for specific types of errors during a period, so the system should allow for an adaptable priority set by the teacher for each student ("Teacher's palette") including: A number of fixed settings related to age. Personal settings for each student.
+PF4 Teachers have modelled a profiling mechanism for VEMUS System in order to adapt priority lists to each student's skill level and personal character: The VEMUS Music School House would have 4-5 floors. The students proceed through 4-5 skill levels during the period 9-14 (15) years, each level corresponding to a floor in the house.
+PF5 Only a small number of errors should be selected and displayed, based on a prioritization (hierarchy) of the type of errors made.
+PF6 The system should detect plausible causes for every mistake.
+PF7 The system has to provide assessment and feedback on incomplete performances.
+PF8 The system has to provide assessment and feedback for performances with a large number of mistakes.
+PF9 Teachers agreed to retain the basics of the IMUTUS evaluation concept for displaying the results to the students. Still it is considered as a drawback that the performance evaluation is only provided in the form of a text in IMUTUS, without displaying the deficiencies by elements of musical notations.
+PF10 The system should provide hints for remedying the mistakes to the learners.
+AM1 Accompanying music, either as playing together or playing in turns, is considered important in music learning for many reasons: it helps the students keep up with the rhythm, it increases the motivation, interest and encouragement, it fosters the ability to continue playing despite difficulties to complete a performance to the end.
+AM2 The student should be able to start the accompaniment from any position in the score.
+AM3 There is no need for adaptive accompaniment from a pedagogical view but tempo should be adjustable. (The system would better guide the student in keeping the tempo.)
+AM4 The "Play after me" concept has been considered to be useful for dealing with complex errors (e.g. rhythm).
+DLMEV1 There is a great need to access music resources in rural and remote areas.
+DLMEV2 There is great lack of teachers of wind instruments in rural areas.
+DLMEV3 The system should be able to provide support for self guided learning.
+DLMEV4 The system should allow for automatic performance evaluation.
+DLMEV5 The users need on-line support (synchronous or asynchronous).
+DLMEV6 Teachers should be supported by the system to easily create learning resources and author learning objects to support distance learners.
+DLMEV7 The educational content is expected to be updated and rearranged regularly.
+DLMEV8 There is a need for a content repository for wind instruments teaching allowing storing and retrieving not only melodies and music exercises but also text, images, and video to support the teaching.
+SP1 The teacher should be allowed to choose the studying procedure.
+SP2 The teacher should have the possibility to intervene to the way the student studies at home. He or she could define on which parameters the learner should emphasize and with what order he or she should deal with those parameters
+SP3 In the self-practice lesson plan multiple (at least three) aspects (e.g. pitch, articulation, tone quality) of evaluation and feedback should be included.
+SP4 The teacher should be able to mark up parts of the score for the student to practice and specify which aspects of the student performance should be evaluated by the system.
+SP5 In any lesson plan the teacher may identify for each music score difficulties and aspects that need special attention.
+SP6 The student should be able to practice the piece in steps (i.e. practice part A, then part B, then the whole piece) and get performance evaluation.
+SP7 The teacher should be able to design and apply a practicing plan. A practicing plan would be a collection of order steps that could have similar form: Step x: Practice on <range in song> focusing on <aspect(s)> until <condition>.
+SP8 The system will need to keep a record of performances for future reference and for monitoring the pupil's progress and to generate a progress report based on a) the performance skills category, b) Student's recorded performance evaluation and c) Student's devoted time on task.
+SP9 After adequate practice the learner should be able to activate all the parameters simultaneously and receive feedback on all of them.
+SP10 At the end of the studying procedure it is important for the student to join the parts of the piece together in order to have the feel of the whole piece.
+SP11 The system should provide the possibility to tuning to a single note (by means of a tuner tool).
+SP12 The system should include exercises of graded difficulty for tuning up.
+VV1 The VEMUS visualizations should be simple, intuitive, not using many colors.
+VV2 The VEMUS visualizations should give a general feedback on students' performance and not a detailed one.
+VV3 The VEMUS visualizations should have musical meaning and in a way be related to musical symbols.
+VV4 While designing visualizations of the pitch: It is needed to have a representation for each note. An option of viewing the pitch only or the duration only would be useful.
+VV5 While designing visualizations of the dynamics The line thickness is more relevant for expressing dynamics. A comprehensive graph (e.g. covering a phrase) outside the score is needed.
+VV6 While designing visualizations of the timbre Using the shapes and saturation is more intuitive than using the sonograms. Between color saturation and shapes, shapes are preferable as the proposed colors are not successful at all. The colors should be represented more accurately. Maybe the color range of grey would be better to avoid many confusing colors.
+VV7 While designing the Fingering Viewer A static 3D fingering viewer (which shifts fingering when clicking on a new note) is of value, provided that the position, appearance and shapes of the fingers are correct. The amplitude of movement should be realistic. A normal fingering table with open and filled circles is a necessary supplement. For the instruments with reed (clarinet, saxophone) and with mouthpiece (trumpet) images which make visible the right position of the lips (embouchure) should be included.
+VV8 Graphic representations of how to use the tongue or blowing in the instrument is necessary as it contributes to creating a correct attack.
+VV9 The system need not only to diagnose a bad attack but also to illustrate graphically how to remedy such a mistake.
+VV10 A diagram or a schema to show how a player could achieve a correct attack with the application of the tongue or by blowing more or less should be included.
+VV11 As sound production is of prime importance to wind instruments, a 3D representation that would support this need (illustrating airflow, attack, mouth position, et al) is required.
+EC1 Include to VEMUS content the basics of how sound is produced correctly in wind instruments and the possibility to visualize how different blows/or tongue positions affect the attack.
+EC2 There is a need for preparatory exercises for wind instruments, which are closely linked to a successful performance.
+EC3 Teachers should be allowed to choose educational content flexibly, depending on their background, taste and preferences.
+EC4 The available content should be consisted with the school-based work and to include examples from the world musical literature (known works).
+EC5 The system should also allow the scores' conversion to the known programs (Sibelius, Finale, Encore, Mozart) as well as to allow for "connections" of the whole displayed or audio music elements with the MIDI system.
+EC6 The content will be organised in lessons and chapters following a logical order of increased difficulty.
+EC7 As it is widely accepted by music teachers that assigning exercises and melodies to students depends on the level of the student, the instrument, and the preferences of the student, the organisation of the content according to the VEMUS Music School House seems to be an appropriate way to organise VEMUS content.
+EC8 The educational content is expected to be updated and rearranged regularly.
+EC9 There is a need for a content repository for wind instruments teaching allowing storing and retrieving not only melodies and music exercises but also text, images, and video to support the teaching.
+EC10 The teachers should be able to: insert new content; either content they produce themselves or content they acquire from other sources; re-arrange the content to meet their the requirements of their own classes or schools and/or to meet their own personal teaching preferences.
