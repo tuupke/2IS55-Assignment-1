@@ -1,5 +1,5 @@
 \documentclass[a4paper,twoside,11pt]{article}
-\usepackage{a4wide,graphicx,fancyhdr,amsmath,amssymb,float}
+\usepackage{a4wide,graphicx,fancyhdr,amsmath,amssymb,float,longtable}
 \usepackage{algorithmic}
 \usepackage{hyperref}
 \usepackage{url}
@@ -34,6 +34,9 @@
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{0pt}
 
+\immediate\write18{../code/analyze.php > analyzeOutput.toc}
+
+
 %-------------------------------- Title ----------------------------------
 
 \title{\sffamily\bfseries 2IS55 Software Evolution - Assignment 1}
@@ -45,8 +48,22 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 \newpage
 
+\section{Introduction}
+
+\section{Methodology}
+
+\section{Case study}
+
+\section{Results}
+
+\section{Threats to validity}
+
+\newpage
+\appendix{Results of analysis}
+\input{"analyzeOutput.toc"}	
 
 
 \begin{thebibliography}{9}

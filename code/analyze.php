@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 function expLine($l){
@@ -18,8 +19,7 @@ function calcScores($keywords, $line){
         $res[$k] = 0;
 
         foreach($v as $word){
-
-            if(strpos($word, $line) !== false){
+            if(strpos($line, $word) !== false){
                 $res[$k]++;
             }
 
@@ -29,11 +29,9 @@ function calcScores($keywords, $line){
     return $res;
 }
 
-$contents = file_get_contents("requirements.txt");
+$contents = file_get_contents(dirname(__FILE__)."/requirements.txt");
 
 $contents = explode("\n", $contents);
-
-// $contents = array_map("expLine", $contents);
 
 $keywords = array(
     "optionality" => array("possibly","eventually","if case","if possible","if appropriate","if needed"),
@@ -41,29 +39,26 @@ $keywords = array(
     "underspecification" => array("data flow","control flow","write access","remote access","authorized","access","testing","functional testing","structural testing","unit testing"),
 );
 
-echo "\begin{tabular}{llccc}
+echo "\\begin{longtable}{|l|p{11cm}|c|c|c|} \\hline
+\\textbf{UR} & \\textbf{Description} & \\textbf{O} & \\textbf{V} & \\textbf{U} \\\\ \\hline \\endhead
 ";
+
 foreach($contents as $ur){
     $split = '/^([A-Z]+[0-9]+) (.*$)/i';
-    $replacement = '$1 & $2';
-    echo preg_replace($split, $replacement, $ur);
+    $replacement = '\\texttt{$1} & $2';
+    echo preg_replace($split, $replacement, $ur) . ' & ';
 
     $tempLine = prepForAnalysis($ur);
 
     $analysis = calcScores($keywords, $tempLine);
-//     print_r($analysis);
-//     echo '
-
-
-// ';
 
     echo $analysis['optionality'] . ' & ';
     echo $analysis['vagueness'] . ' & ';
-    echo $analysis['underspecification'] . ' \\\\
+    echo $analysis['underspecification'] . ' \\\\ \\hline
 ';
 }
 
-echo "\end{tabular}
+echo "\\end{longtable}
 
 ";
 
