@@ -31,7 +31,7 @@ SP3 In the self-practice lesson plan multiple (at least three) aspects (e.g. pit
 SP4 The teacher should be able to mark up parts of the score for the student to practice and specify which aspects of the student performance should be evaluated by the system.
 SP5 In any lesson plan the teacher may identify for each music score difficulties and aspects that need special attention.
 SP6 The student should be able to practice the piece in steps (i.e. practice part A, then part B, then the whole piece) and get performance evaluation.
-SP7 The teacher should be able to design and apply a practicing plan. A practicing plan would be a collection of order steps that could have similar form: Step x: Practice on <range in song> focusing on <aspect(s)> until <condition>.
+SP7 The teacher should be able to design and apply a practicing plan. A practicing plan would be a collection of order steps that could have similar form: Step x: Practice on $<$range in song$>$ focusing on $<$aspect(s)$>$ until $<$condition$>$.
 SP8 The system will need to keep a record of performances for future reference and for monitoring the pupil's progress and to generate a progress report based on a) the performance skills category, b) Student's recorded performance evaluation and c) Student's devoted time on task.
 SP9 After adequate practice the learner should be able to activate all the parameters simultaneously and receive feedback on all of them.
 SP10 At the end of the studying procedure it is important for the student to join the parts of the piece together in order to have the feel of the whole piece.
