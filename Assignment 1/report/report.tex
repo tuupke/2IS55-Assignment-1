@@ -61,22 +61,28 @@ In this report the quality of the user requirements in the user requirements doc
 
 \section{Methodology}
 In this section the chosen methodology is explained. We are using 4 distinct steps to test the suitability for software evolution which will be discussed in seperate sections. 
-\subsection{Quality assesment}
+\subsection{Quality assesment of the requirements}
 We will start by doing a quality assesment on the requiremensts using a keyword analysis. We want to test this through an automated scoring program, which takes word lists and checks each requirement for the words in this list and counts the number of matches. We will focus on problems with regards to optionality, vagueness and underspecification for which we have listed the keywords. Most of the keywords stem from a paper by F. Frabrini\cite{paper:ling_approach} while the others are taken from the requirements themselves and are more specific to the style of writing of the requirements.
 \medskip
 
 \input{keywords.toc}
 \subsection{Dependency check}
-For the dependency check we will do an analysis on the requirements, to see which requirements are necessary for a given requirement to be implementable. This is done manually using an iterative process in order to analyze the total set of requirements
+For the dependency check we will do an analysis on the requirements, to see which requirements are necessary for a given requirement to be implementable checking for both types of depencies (temporal and satisfiability). This is done manually using an iterative process in order to analyze the total set of requirements.
 
-\subsection{Tracability graph}
-The tracability graph will be generated using the results from the dependency check. For each requirement we generate a vertex with a label equal to the requirement shorthand, while each dependency is represented using a directed edge between to vertex. An edge from vertex $v$ to vertex $u$ representing that $u$ is a dependency of $v$ (i.e. $v$ requires $u$). When a requirement is dependent upon or depending on any other requirement it will still be shown in the graph.
- 
-\subsection{Analysis}
-For the analysis we look at the results of all 3 
+\subsection{Tracability graph analysis}
+The tracability graph will be generated using the results from the dependency check. For each requirement we generate a vertex with a label equal to the requirement shorthand, while each dependency is represented using a directed edge between to vertex. An edge from vertex $v$ to vertex $u$ representing that $u$ is a dependency of $v$ (i.e. $v$ requires $u$). 
+
+For the analysis we will look at 
+  
+\subsection{Combination of anylses}
+For the analysis we look at the results of all 3 analyses and spot the signals which point to the evolvability of the system.
 
 \section{Case study}
+The system we have to analyze is the VEMUS system for automated learning of musical instruments. The user requirements listed in section \ref{userreq} are under investigation whether they allow for proper software evolution. They will be analyzed using the procedures described in the previous section.
+
 \subsection{Requirements}
+\label{userreq}
+These are the requirements:
 \input{requirements.tex}
 
 \section{Results}
@@ -91,22 +97,48 @@ There are also a some user requirements which are very strange and should not be
 
 \subsubsection{Manually matched user requirements}
 \label{manual_match}
-After analyzing the automatic check we were pleased with the results. All the requirements we felt needed to be flagged had been flagged by the automatic system. Although there are requirements which are not actual requirements: {\sc PF9, AM1, AM4, DLMEV1, DLMEV2, DLMEV7} and  {\sc DLMEV8} but instead are more general remarks. Though they are not ``proper'' requirements they should not be flagged using an keyword based search since they do not neccesarily contain words which point to the misuse.
+After analyzing the automatic check we were pleased with the results. All the requirements we felt needed to be flagged had been flagged by the automatic system. Although there are requirements which are not actual requirements: {\sc PF9, AM1, AM4, DLMEV1, DLMEV2, DLMEV7} and  {\sc DLMEV8} but instead are more general remarks. Though they are not ``proper'' requirements they should not be flagged using an keyword based search since they do not neccesarily contain words which point to the misuse. \\
+
+From the results we get a clear picture, many requirements are lacking proper content and are therefor a threat to the evolvability of the system. When the requirements are not clear enough, or are left open for interpretation, erratic behaviour for the end user might be the consequence. Especially after many people have worked on the system the risk is very high that the system will start to function inconsistently, since everyone can interpret the user requirements differently.
 
 \subsection{Dependency check}
+The following table lists all dependencies which we have found with the reason of the dependency. {\sc A $\rightarrow$ B} means that {\sc A} is dependent upon {\sc B}.
 
 \input{dependencies.toc}
-\subsection{Tracability graph}
-Figure \ref{trac_graph} contains the tracability graph
-\begin{figure}[h]
+
+We can already detect that there are some user requirements which are depended upon quite often, while in general we can conclude that the total number of dependencies is not very big compared to the number of user requirements. We do have to note that whenever a dependency could be solved through transitivity we omitted it whenever possible. (e.g. when {\sc A $\rightarrow$ B, B $\rightarrow$ C} then {\sc A $\rightarrow$ C} was omitted. \\
+
+Purely the dependencies do not provide a clear picture of the evolvability of a system. But we cannot conclude from the shear number of dependencies whether they provide a threat to the evolvability of the system as a whole. The tracability graph in section \ref{sec::aa_t} is much more suitable for that.
+
+
+\subsection{Tracability graph analysis} 
+\label{sec::aa_t}
+The tracability graph we want to analyze is contained in figure \ref{fig:trac_grapph}. From it we can see that there are five requirements which are dependent upon quite often: {\sc VV2, VV3, PF1, TSF3, DLMEV8}. Luckily these requirements are atomic and basic to the system, which does decrease the issues which could be caused if they change.\\
+
+We can see that there only exists 1 group with cycles which is the visualization group. This is a big problem since changing only one of these requirements will impact all of them in a cyclic way which cannot be broken easily. Luckily the major problem is that the requirement which causes this issue (VV2) will not have to change since it is a logical consequence of the system which dampens the problems which could be caused by changing a requirement in that group. \\
+
+The groups are quite disconnected, only the SP, PF and TSF groups are connected in some minor way which makes total sense looking to the requirements. However it implies that whenever (for example) TSF3 would change, a major part of the system would have to change too which provides much risk.
+
+
+
+\begin{figure}[p]
 \includegraphics[scale=0.6,angle=90]{graph.pdf}
-\label{trac_graph}
 \centering
 \caption{The tracability graph}
+\label{fig:trac_grapph}
 \end{figure}
-\subsection{Analysis}
+
+
+\subsection{Combination of anylses}
+All in all we can say that the evolvability of the system is quite at risk. The requirements can be interpreted in many different ways and many are not properly specified. The total number of dependencies may not be that big, but the impact they have when a few key requirements would change is very dramatic and therefor badly influence the evolvability.\\
+
+On the other hand, those key dependencies are not likely to change. They are basic and/or atomic and are likely to remain constant. With some (minor) work on the structure of those requirements the impact of interprations on them can decrease quite dramatically. \\
+
+Concluding we can say that the VEMUS is at risk, but depending on the way the software will evolve the risk can be limited. With proper structure and some work on improving the user requirements big strides can be made in the evolvability of VEMUS and therefor increase the lifespan of the system.
+
 
 \section{Threats to validity}
+Since we rely for a big part on the correctness of the assesment of the user requirements using the keyword based approach, any break in validity in this part will invalidate the conclusing of the previous section. Since for many requirements specific interpretations were made, the validity of the tracability graph can also be question, altough we feel strongly about the correctness of the interpretations.
 
 \begin{thebibliography}{9}
 \bibitem{paper:ling_approach}
