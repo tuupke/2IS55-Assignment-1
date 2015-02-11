@@ -1,0 +1,54 @@
+digraph G {
+TSF3 -> TSF4 #Anotation must exist before they can be used in feedback
+TSF3 -> TSF1 #The strictness should be known when providing automatic feedback
+TSF5 -> TSF4 #For the pool to exist, the notions of annotations should be known
+
+PF2 -> PF1 #The requirements of the real teacher are needed for the automatic system
+PF5 -> PF4 #The prioritization is based on the profiling mechanism
+PF7 -> PF1 #The performance evauluation has to be known
+PF7 -> TSF3 #PF7 is a specialization of TSF7
+PF8 -> PF7 #PF8 is a specialization of PF7
+PF8 -> PF1 #The performance evauluation has to be known
+
+AM3 -> AM2 #When music cannot be started adjusting temp does not make much sense
+
+DLMEV3 -> PF1 #The concept of (actual) music skill should be quantifiable before guided self teaching can be performed
+DLMEV7 -> DLMEV8 #The educational context to be changed needs to be known before it can be changed
+
+SP2 -> SP1 #If the teacher cannot set the studyprogram, he/she cannot intervene.
+SP3 -> PF2 #The level of the feedback has to be known beforehand
+SP3 -> TSF3 #The feedback can only happen when the system can actually provide it.
+SP4 -> TSF4 #When the possibility for providing annotations do not exist one cannot mark specific areas to practice
+
+SP6 -> TSF3 #Otherwise the system cannot provide feedback to part of the played piece
+SP7 -> SP5 #When the teacher cannot identify the difficult parts of the piece he cannot provide the student with an adapted practicing plan
+
+SP8 -> PF1 #Since SP8 strictely requires the performance categories
+
+SP10 -> SP6 #When the student cannot practice the piece in seperate pieces he also cannot play multiple of those pieces.
+
+VV2 -> VV1 #The visualizations are dependent on the structure of the visualizations
+VV1 -> VV3 #VV3 specifies the visualizations of VV1
+
+VV3 -> VV4 #The visualization depends on the data to visualize
+VV3 -> VV5 #The visualization depends on the data to visualize
+VV3 -> VV6 #The visualization depends on the data to visualize
+VV3 -> VV7 #The visualization depends on the data to visualize
+
+VV4 -> VV2 #The structure of the visualization is required 
+VV5 -> VV2 #The structure of the visualization is required
+VV6 -> VV2 #The structure of the visualization is required
+VV7 -> VV2 #The structure of the visualization is required
+
+VV8 -> VV1 #The structure of the visualization is required
+
+VV11 -> VV1 #The structure of the visualization is required
+
+EC1 -> DLMEV8 #Since the repository needs to exist before something can be added
+EC2 -> DLMEV8 #Since the repository needs to exist before something can be added
+DLMEV8 -> EC6 #Since when implementing DLMEV8 the structure specified in EC6 is neccesary to do it properly
+EC8 -> DLMEV8 #For content to be updated the container for the content must exist
+EC9 -> DLMEV8 #Since the repository needs to exist before something can be added
+EC8 -> EC10 #When teachers do not update the contents, they cannot be updated frequently
+EC10 -> EC6 #If EC6 would not exist, there is nothing to arrange
+}

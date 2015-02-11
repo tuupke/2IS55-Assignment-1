@@ -1,8 +1,10 @@
 \documentclass[a4paper,twoside,11pt]{article}
 \usepackage{a4wide,graphicx,fancyhdr,amsmath,amssymb,float,longtable}
 \usepackage{algorithmic}
-\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage{url}
+\usepackage{color}
+\usepackage[titletoc,toc]{appendix}
 
 %----------------------- Macros and Definitions --------------------------
 
@@ -34,7 +36,9 @@
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\immediate\write18{../code/analyze.php > analyzeOutput.toc}
+\immediate\write18{../code/analyze.php analyze > analyzeOutput.toc}
+\immediate\write18{../code/analyze.php keywords > keywords.toc}
+\immediate\write18{ccomps -x graph.dot | dot | gvpack -array2 | neato -Tpdf -n2 -o graph.pdf}
 
 
 %-------------------------------- Title ----------------------------------
@@ -52,13 +56,23 @@
 \newpage
 
 \section{Introduction}
-In this paper the quality of the user requirements in the user requirements document of the Virtual European Music School (VEMUS) will be analyzed. This will happen on an individual basis using a keyword based approach and by analyzing dependencies between the requirements which will be visualized with a tracability graph. The goal is to get asses the suitability for evolution of the VEMUS system from the given requirements. 
+In this report the quality of the user requirements in the user requirements document of the Virtual European Music School (VEMUS) will be analyzed. This will happen on an individual basis using a keyword based approach and by analyzing dependencies between the requirements which will be visualized with a tracability graph. The goal is to get asses the suitability for evolution of the VEMUS system from the given requirements. 
 
 \section{Methodology}
+In this section the chosen methodology is explained. We are using 4 distinct steps to test the suitability for software evolution which will be discussed in seperate sections. 
 \subsection{Quality assesment}
+We will start by doing a quality assesment on the requiremensts using a keyword analysis. We want to test this through an automated scoring program, which takes word lists and checks each requirement for the words in this list and counts the number of matches. We will focus on problems with regards to optionality, vagueness and underspecification for which we have listed the keywords. Most of the keywords stem from a paper by F. Frabrini\cite{paper:ling_approach} while the others are taken from the requirements themselves and are more specific to the style of writing of the requirements.
+\medskip
+
+\input{keywords.toc}
 \subsection{Dependency check}
+For the dependency check we will do an analysis on the requirements, to see which requirements are necessary for a given requirement to be implementable. This is done manually using an iterative process in order to analyze the total set of requirements
+
 \subsection{Tracability graph}
+The tracability graph will be generated using the results from the dependency check. For each requirement we generate a vertex with a label equal to the requirement shorthand, while each dependency is represented using a directed edge between to vertex. An edge from vertex $v$ to vertex $u$ representing that $u$ is a dependency of $v$ (i.e. $v$ requires $u$). When a requirement is dependent upon or depending on any other requirement it will still be shown in the graph.
+ 
 \subsection{Analysis}
+For the analysis we look at the results of all 3 
 
 \section{Case study}
 \subsection{Requirements}
@@ -66,18 +80,39 @@ In this paper the quality of the user requirements in the user requirements docu
 
 \section{Results}
 \subsection{Quality assesment}
+The results of the automated quality assesment can be found in the table of Appendix \ref{appendix:analysis}, with the scores for the keyword based assesment specified with each requirement. The scores are contained in the last three columns marked {\sc O,V,U} for Optionality, Vagueness and Underspecification respectively. In section \ref{auto_match} we will explain all automatically matched user requirements while section \ref{manual_match} will contain the results for the manual check. \\
+
+There are also a some user requirements which are very strange and should not be described as a user requirements. These will also be discussed in section \ref{manual_match}.
+
+\subsubsection{Automatically matched user requirements}
+\label{auto_match}
+\input{matchedRequirements.toc}
+
+\subsubsection{Manually matched user requirements}
+\label{manual_match}
+After analyzing the automatic check we were pleased with the results. All the requirements we felt needed to be flagged had been flagged by the automatic system. Although there are requirements which are not actual requirements: {\sc PF9, AM1, AM4, DLMEV1, DLMEV2, DLMEV7} and  {\sc DLMEV8} but instead are more general remarks. Though they are not ``proper'' requirements they should not be flagged using an keyword based search since they do not neccesarily contain words which point to the misuse.
+
 \subsection{Dependency check}
 \subsection{Tracability graph}
+\begin{figure}[h]
+\includegraphics[scale=0.6,angle=90]{graph.pdf}
+\label{trac_graph}
+\centering
+\caption{The tracability graph}
+\end{figure}
 \subsection{Analysis}
 
 \section{Threats to validity}
 
+\begin{thebibliography}{9}
+\bibitem{paper:ling_approach}
+F. Fabbrini, M. Fusani, S. Gnesi, G. Lami. The Linguistic Approach to the Natural Language Requirements Quality: Benefits of the use of an Automatic Tool. 26th Annual IEEE Computer Society - NASA Goddard Space Flight Center Software Engineering Workshop, Greenbelt, MA, USA 27-29 November, 2001. Available at \url{http://quars.isti.cnr.it/DOCs/FabbriniFusaniGnesiLami\_TheLinguisticApproachToTheNaturalLanguageRequirementsQuality-BenefitsOfTheUseOfAnAutomaticTool\_2001.pdf}
+ \end{thebibliography}
+
 \newpage
-\appendix{Results of analysis}
+\begin{appendices}
+\section{Results of keyword analysis} \label{appendix:analysis}
 
 \noindent\input{"analyzeOutput.toc"}	
-
-
-\begin{thebibliography}{9}
- \end{thebibliography}
+\end{appendices}
 \end{document}
