@@ -25,7 +25,7 @@ SP7 -> SP5 #When the teacher cannot identify the difficult parts of the piece he
 
 SP8 -> PF1 #Since SP8 strictely requires the performance categories
 
-SP10 -> SP6 #When the student cannot practice the piece in seperate pieces he also cannot play multiple of those pieces.
+SP10 -> SP6 #When the student cannot practice the piece in seperate pieces he also cannot play multiple of those pieces
 
 VV2 -> VV1 #The visualizations are dependent on the structure of the visualizations
 VV1 -> VV3 #VV3 specifies the visualizations of VV1
@@ -51,4 +51,5 @@ EC8 -> DLMEV8 #For content to be updated the container for the content must exis
 EC9 -> DLMEV8 #Since the repository needs to exist before something can be added
 EC8 -> EC10 #When teachers do not update the contents, they cannot be updated frequently
 EC10 -> EC6 #If EC6 would not exist, there is nothing to arrange
+
 }

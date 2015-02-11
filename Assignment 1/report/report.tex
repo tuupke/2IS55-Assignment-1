@@ -36,8 +36,9 @@
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\immediate\write18{../code/analyze.php analyze > analyzeOutput.toc}
-\immediate\write18{../code/analyze.php keywords > keywords.toc}
+\immediate\write18{php ../code/analyze.php analyze > analyzeOutput.toc}
+\immediate\write18{php ../code/analyze.php keywords > keywords.toc}
+\immediate\write18{php ../code/parseDependencies.php graph.dot > dependencies.toc}
 \immediate\write18{ccomps -x graph.dot | dot | gvpack -array2 | neato -Tpdf -n2 -o graph.pdf}
 
 
@@ -93,7 +94,10 @@ There are also a some user requirements which are very strange and should not be
 After analyzing the automatic check we were pleased with the results. All the requirements we felt needed to be flagged had been flagged by the automatic system. Although there are requirements which are not actual requirements: {\sc PF9, AM1, AM4, DLMEV1, DLMEV2, DLMEV7} and  {\sc DLMEV8} but instead are more general remarks. Though they are not ``proper'' requirements they should not be flagged using an keyword based search since they do not neccesarily contain words which point to the misuse.
 
 \subsection{Dependency check}
+
+\input{dependencies.toc}
 \subsection{Tracability graph}
+Figure \ref{trac_graph} contains the tracability graph
 \begin{figure}[h]
 \includegraphics[scale=0.6,angle=90]{graph.pdf}
 \label{trac_graph}
