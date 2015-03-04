@@ -137,6 +137,7 @@ public class HTMLEntities {
                 this.value = value;
                 this.next = next;
             }
+     
         }
     }
 

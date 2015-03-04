@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test/java"/>
+	<classpathentry kind="lib" path="lib/bcel-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-3.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/maven-ant-tasks-2.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.0.2/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.0.2/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.1.0/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.1.0/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.10.0/xercesImpl-2.10.0.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.10.0/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.2.1/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.2.1/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.3.0/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.3.0/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.3.0/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.8.1/xercesImpl-2.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.8.1/xml-apis-1.3.03.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.9.1/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2.9.1/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-minimal/xercesMinimal.jar"/>
+	<classpathentry kind="lib" path="nekohtml.jar"/>
+	<classpathentry kind="lib" path="nekohtmlSamples.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
