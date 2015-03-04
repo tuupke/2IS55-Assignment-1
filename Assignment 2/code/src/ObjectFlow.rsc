@@ -1,4 +1,4 @@
-module flowUnit
+module ObjectFlow
 
 import List;
 import Relation;
@@ -82,23 +82,31 @@ tuple[rel[loc, loc] dependencies, rel[loc, loc] associations] getObjectFlowUnit(
 	dependenciess = {<from, to> | <from, to> <- dependenciess && from in classes(M3model) && to in classes(M3model)}; 
 
 	// Remove selfloops
-	associationss = removeSelfLoops(associationss);
-	dependenciess = removeSelfLoops(dependenciess);
+	//associationsss = removeSelfLoops(associationss) - {<from, to> | <from, to> <- associationss, from==to};
+	//dependenciesss = removeSelfLoops(dependenciess) - {<from, to> | <from, to> <- dependenciess, from==to};
 
-	return <dependenciess, associationss>;
-} 
+	return <simplify(dependenciess, M3model), simplify(associationss, M3model)>;
+}
 
-public OFG removeSelfLoops(OFG ofg){
-	// Probably could have done with set operations, but this works too
-	toReturn = ofg;
+rel[loc,loc] simplify(rel[loc, loc] ofg, M3 M3model){
+	// It is possible that class a 
 	
-	for(tuple[loc from, loc to] tup <- ofg) {
-		if(tup.from == tup.to) {
-			toReturn -= tup;
+	extendedClasses = {to | <from, to> <- M3model@extends};
+	
+	for(loc class <- classes(M3model)) {
+	
+		rel[loc, loc] ofCls = {<from, to> | <from, to> <- ofg && from == class};
+	
+		for(loc extendedClass <- extendedClasses){
+			rel[loc,loc] allChildren = {<class, from> | <from, to> <- M3model@extends, to == extendedClass};
+			if(allChildren <= ofCls){
+				ofg -= allChildren;
+				ofg += <class, extendedClass>;
+			}
 		}
 	}
 	
-	return toReturn;
+	return ofg;
 }
 
 public rel[loc, loc] OFGtoAssociations(OFG ofg, M3 M3model){
@@ -109,7 +117,7 @@ public rel[loc, loc] OFGtoAssociations(OFG ofg, M3 M3model){
 
 public rel[loc, loc] OFGtoDependencies(OFG ofg, M3 M3model){
 	// Dependencies are of the form: class A { void f(B b) {b.g(); } } 
-	// and: class A { void f() {B b; … b.g();} } 
+	// and: class A { void f() {B b; ... b.g();} } 
 
 	// Get all parameters and variables
 	parames = {<from, to> | <from, to> <- ofg, from.scheme == "java+parameter"};

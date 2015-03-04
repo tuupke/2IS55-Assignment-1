@@ -1,4 +1,4 @@
-module buildDiagram
+module BuildDiagram
 
 import List;
 import Relation;
@@ -83,8 +83,10 @@ public str getClassFields(loc classLoc, M3 M3model, rel[loc, str] M3modelInvert)
 	types = domainR(M3model@types, fields);
 	modifiers = domainR(M3model@modifiers, fields);
 	
+	list[loc] fieldsList = sort(toList(fields));
+	
 	//Loop through the found field locations
-	for(loc field <- fields){
+	for(loc field <- fieldsList){
 		// Get the fieldname
 		str fieldName = getOneFrom(M3modelInvert[field]);
 		
@@ -231,17 +233,19 @@ public str renderProject(loc location){
 		dotContents += buildClass(class, M3model, M3modelInvert);
 	}
 	
-	// Add the realizations
-	rel[loc, loc] realisations = M3model@implements;
-	realisations -= {<a, b> | <a, b> <- realisations, a==b || a notin classes || b notin classes};
-	dotContents += realisation;
-	dotContents += prettifyRelations(realisations, M3modelInvert);
-
 	// Add the generatlizations
 	rel[loc,loc] generalizations = M3model@extends;
 	generalizations -= {<a, b> | <a, b> <- generalizations, a == b || a notin classes || b notin classes};
+	//generalizations = {<a, b> | <a, b> <- generalizations, a in classes && b in classes};
 	dotContents += generalization;
 	dotContents += prettifyRelations(generalizations, M3modelInvert);
+	
+	// Add the realizations
+	rel[loc, loc] realisations = M3model@implements;
+	realisations -= {<a, b> | <a, b> <- realisations, a==b || a notin classes || b notin classes};
+	//realisations = {<a, b> | <a, b> <- realisations, a in classes, b in classes};
+	dotContents += realisation;
+	dotContents += prettifyRelations(realisations, M3modelInvert);
 	
 	// -- Tricky part which relies on the object flow graph --
 	// Compute everything from the flowgraph using the algorithm in the slides/book
@@ -250,11 +254,13 @@ public str renderProject(loc location){
 	
 	// Add the associations
 	rel[loc,loc] associations = flow[1] - realisations - generalizations;
+	associations -= {<from, to> | <from, to> <- associations, from == to};
 	dotContents += association;
 	dotContents += prettifyRelations(associations, M3modelInvert);
 	
 	// Add the dependencies
 	rel[loc,loc] dependenci = flow[0] - associations - realisations - generalizations;
+	dependenci -= {<from, to> | <from, to> <- dependenci, from == to || from notin classes || to notin classes};
 	dotContents += dependency;
 	dotContents += prettifyRelations(dependenci, M3modelInvert);
 	
@@ -307,4 +313,10 @@ public str convertTypeSymbolToHuman(TypeSymbol t, rel[loc,str] M3modelInvert){
 	// If this gets triggered, the switch needs updating
 	println("Typesymbolconverter unit needs work: <t> not present");
 	return "?";
+}
+
+public void doAll(){
+	buildForProject(|project://eLib|, |home:///TUe/2IS55%20-%20Software%20Evolution/Assignment%202/report/dotFiles/eLib.dot|);
+	buildForProject(|project://nekohtml-0.9.5|, |home:///TUe/2IS55%20-%20Software%20Evolution/Assignment%202/report/dotFiles/nekohtml-0.9.5.dot|);
+	buildForProject(|project://nekohtml-1.9.21|, |home:///TUe/2IS55%20-%20Software%20Evolution/Assignment%202/report/dotFiles/nekohtml-1.9.21.dot|);
 }

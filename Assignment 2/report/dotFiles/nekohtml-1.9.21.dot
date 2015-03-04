@@ -1,0 +1,242 @@
+digraph classes {
+  fontname = "Bitstream Vera Sans"
+  fontsize = 8
+  node [ fontname = "Bitstream Vera Sans" fontsize = 8 shape = "record" ]
+  edge [ fontname = "Bitstream Vera Sans" fontsize = 8 ]HTMLScannerContentScanner [
+label = "{ContentScanner| -  FATTRIBUTES : XMLAttributesImpl\l -  FQNAME : QName\l|# addLocationItem(index: int, attributes: XMLAttributes) : void\l -  changeEncoding(charset: String) : boolean\l -  isEnded(ename: String) : boolean\l# nextContent(len: int) : String\l -  removeSpaces(content: String) : String\l+ scan(complete: boolean) : boolean\l# scanAttribute(attributes: XMLAttributesImpl, empty: array[1](boolean)) : boolean\l# scanAttribute(attributes: XMLAttributesImpl, empty: array[1](boolean), endc: char) : boolean\l# scanCDATA() : void\l# scanCharacters() : void\l# scanComment() : void\l# scanEndElement() : void\l# scanMarkupContent(cend: char, buffer: XMLStringBuffer) : boolean\l# scanPI() : void\l# scanPseudoAttribute(attributes: XMLAttributesImpl) : boolean\l -  scanScriptContent() : void\l# scanStartElement(empty: array[1](boolean)) : String\l -  scanUntilEndTag(tagName: String) : void\l}"
+]
+HTMLScannerSpecialScanner [
+label = "{SpecialScanner|# fElementName : String\l -  FQNAME : QName\l -  FSTRINGBUFFER : XMLStringBuffer\l# fStyle : boolean\l# fTextarea : boolean\l# fTitle : boolean\l|+ scan(complete: boolean) : boolean\l# scanCharacters(buffer: XMLStringBuffer, delimiter: int) : void\l+ setElementName(ename: String) : Scanner\l}"
+]
+filtersPurifier [
+label = "{Purifier|# _AUGMENTATIONS_ : String\l# _NAMESPACES_ : String\l -  _RECOGNIZED_FEATURES_ : array[1](String)\l# _SYNTHESIZED_ITEM_ : HTMLEventInfo\l+ _SYNTHESIZED_NAMESPACE_PREFX_ : String\l# fAugmentations : boolean\l# fInCDATASection : boolean\l -  FINFOSETAUGS : HTMLAugmentations\l# fNamespaceContext : NamespaceContext\l# fNamespaces : boolean\l# fPublicId : String\l -  fQName : QName\l# fSeenDoctype : boolean\l# fSeenRootElement : boolean\l -  FSTRINGBUFFER : XMLStringBuffer\l# fSynthesizedNamespaceCount : int\l# fSystemId : String\l|+ characters(augs: Augmentations, text: XMLString) : void\l+ comment(text: XMLString, augs: Augmentations) : void\l+ doctypeDecl(pubid: String, augs: Augmentations, sysid: String, root: String) : void\l+ emptyElement(element: QName, attrs: XMLAttributes, augs: Augmentations) : void\l+ endCDATA(augs: Augmentations) : void\l+ endElement(element: QName, augs: Augmentations) : void\l# handleStartDocument() : void\l# handleStartElement(element: QName, attrs: XMLAttributes) : void\l+ processingInstruction(augs: Augmentations, data: XMLString, target: String) : void\l# purifyName(localpart: boolean, name: String) : String\l# purifyQName(qname: QName) : QName\l# purifyText(text: XMLString) : XMLString\l+ reset(manager: XMLComponentManager) : void\l+ startCDATA(augs: Augmentations) : void\l+ startDocument(augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ startDocument(nscontext: NamespaceContext, augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ startElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l# synthesizeBinding(ns: String, attrs: XMLAttributes) : void\l# SYNTHESIZEDAUGS() : Augmentations\l# _toHexString_(c: int, padlen: int) : String\l+ xmlDecl(encoding: String, version: String, augs: Augmentations, standalone: String) : void\l}"
+]
+sampleTestHTMLDOM [
+label = "{TestHTMLDOM||+ _main_(argv: array[1](String)) : void\l+ _print_(indent: String, node: Node) : void\l}"
+]
+HTMLTagBalancerElementEntry [
+label = "{ElementEntry| -  AUGS_ : Augmentations\l -  NAME_ : QName\l|Const ElementEntry(augs: Augmentations, element: QName)\l}"
+]
+htmlLocatorEncodingTest [
+label = "{LocatorEncodingTest||+ test() : void\l}"
+]
+HTMLEventInfoSynthesizedItem [
+label = "{SynthesizedItem||+ getBeginCharacterOffset() : int\l+ getBeginColumnNumber() : int\l+ getBeginLineNumber() : int\l+ getEndCharacterOffset() : int\l+ getEndColumnNumber() : int\l+ getEndLineNumber() : int\l+ isSynthesized() : boolean\l+ toString() : String\l}"
+]
+sampleMinimal [
+label = "{Minimal||+ endElement(element: QName, augs: Augmentations) : void\l+ _main_(argv: array[1](String)) : void\l+ startElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l}"
+]
+HTMLScannerTestEvaluateInputSourceFilter [
+label = "{EvaluateInputSourceFilter| -  collectedStrings : List\l -  _counter_ : int\l# fConfiguration : HTMLConfiguration\l|Const EvaluateInputSourceFilter(config: HTMLConfiguration)\l+ endElement(element: QName, augs: Augmentations) : void\l -  insert(string: String) : void\l+ startElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l}"
+]
+htmlHeadNamespaceBug [
+label = "{HeadNamespaceBug||+ testHeadNamespace() : void\l}"
+]
+sampleHTMLSAXParser [
+label = "{HTMLSAXParser||Const HTMLSAXParser()\l}"
+]
+filtersWriterTest [
+label = "{WriterTest||+ testEmptyAttribute() : void\l}"
+]
+parsersDOMFragmentParser [
+label = "{DOMFragmentParser|# _CURRENT_ELEMENT_NODE_ : String\l# _DOCUMENT_FRAGMENT_ : String\l# _ERROR_HANDLER_ : String\l# _RECOGNIZED_FEATURES_ : array[1](String)\l# _RECOGNIZED_PROPERTIES_ : array[1](String)\l# fCurrentNode : Node\l# fDocument : Document\l# fDocumentFragment : DocumentFragment\l# fDocumentSource : XMLDocumentSource\l# fInCDATASection : boolean\l# fParserConfiguration : XMLParserConfiguration\l|Const DOMFragmentParser()\l+ characters(augs: Augmentations, text: XMLString) : void\l+ comment(text: XMLString, augs: Augmentations) : void\l+ doctypeDecl(sysid: String, augs: Augmentations, pubid: String, root: String) : void\l+ emptyElement(element: QName, attrs: XMLAttributes, augs: Augmentations) : void\l+ endCDATA(augs: Augmentations) : void\l+ endDocument(augs: Augmentations) : void\l+ endElement(element: QName, augs: Augmentations) : void\l+ endGeneralEntity(name: String, augs: Augmentations) : void\l+ endPrefixMapping(augs: Augmentations, prefix: String) : void\l+ getDocumentSource() : XMLDocumentSource\l+ getErrorHandler() : ErrorHandler\l+ getFeature(featureId: String) : boolean\l+ getProperty(propertyId: String) : object\l+ ignorableWhitespace(text: XMLString, augs: Augmentations) : void\l+ parse(systemId: String, fragment: DocumentFragment) : void\l+ parse(fragment: DocumentFragment, source: InputSource) : void\l+ processingInstruction(target: String, augs: Augmentations, data: XMLString) : void\l+ setDocumentSource(source: XMLDocumentSource) : void\l+ setErrorHandler(errorHandler: ErrorHandler) : void\l+ setFeature(featureId: String, state: boolean) : void\l+ setProperty(value: object, propertyId: String) : void\l+ startCDATA(augs: Augmentations) : void\l+ startDocument(encoding: String, augs: Augmentations, locator: XMLLocator) : void\l+ startDocument(encoding: String, locator: XMLLocator, augs: Augmentations, nscontext: NamespaceContext) : void\l+ startElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l+ startGeneralEntity(name: String, encoding: String, id: XMLResourceIdentifier, augs: Augmentations) : void\l+ startPrefixMapping(uri: String, augs: Augmentations, prefix: String) : void\l+ textDecl(augs: Augmentations, version: String, encoding: String) : void\l+ xmlDecl(version: String, encoding: String, augs: Augmentations, standalone: String) : void\l}"
+]
+xercesbridgeXercesBridge_2_3 [
+label = "{XercesBridge_2_3||Const XercesBridge_2_3()\l+ NamespaceContext_declarePrefix(avalue: String, namespaceContext: NamespaceContext, ns: String) : void\l}"
+]
+HTMLTagBalancerInfo [
+label = "{Info|+ attributes : XMLAttributes\l+ element : Element\l+ qname : QName\l|Const Info(element: Element, qname: QName)\lConst Info(attributes: XMLAttributes, element: Element, qname: QName)\l+ toString() : String\l}"
+]
+ObjectFactoryConfigurationError [
+label = "{ConfigurationError| -  exception : Exception\l|Const ConfigurationError(x: Exception, msg: String)\lgetException() : Exception\l}"
+]
+xercesbridgeXercesBridge_2_1 [
+label = "{XercesBridge_2_1||Const XercesBridge_2_1()\l+ XMLDocumentFilter_setDocumentSource(lastSource: XMLDocumentSource, filter: XMLDocumentFilter) : void\l+ XMLDocumentHandler_startDocument(augs: Augmentations, nscontext: NamespaceContext, documentHandler: XMLDocumentHandler, locator: XMLLocator, encoding: String) : void\l+ getVersion() : String\l}"
+]
+HTMLScannerPlaybackInputStream [
+label = "{PlaybackInputStream| -  _DEBUG_PLAYBACK_ : boolean\l# fByteBuffer : array[1](byte)\l# fByteLength : int\l# fByteOffset : int\l# fCleared : boolean\l# fDetected : boolean\l# fPlayback : boolean\l+ fPushbackLength : int\l+ fPushbackOffset : int\l|Const PlaybackInputStream(in: InputStream)\l+ clear() : void\l+ detectEncoding(encodings: array[1](String)) : void\l+ playback() : void\l+ read() : int\l+ read(array: array[1](byte)) : int\l+ read(length: int, offset: int, array: array[1](byte)) : int\l}"
+]
+NamespaceSupportEntry [
+label = "{Entry|+ prefix : String\l+ uri : String\l|Const Entry(prefix: String, uri: String)\l}"
+]
+xercesbridgeXercesBridge_2_0 [
+label = "{XercesBridge_2_0||Const XercesBridge_2_0()\l+ XMLDocumentHandler_endPrefixMapping(documentHandler: XMLDocumentHandler, augs: Augmentations, prefix: String) : void\l+ XMLDocumentHandler_startDocument(augs: Augmentations, nscontext: NamespaceContext, documentHandler: XMLDocumentHandler, locator: XMLLocator, encoding: String) : void\l+ XMLDocumentHandler_startPrefixMapping(prefix: String, augs: Augmentations, uri: String, documentHandler: XMLDocumentHandler) : void\l+ getVersion() : String\l}"
+]
+htmlHTMLScanner [
+label = "{HTMLScanner|+ _ALLOW_SELFCLOSING_IFRAME_ : String\l+ _ALLOW_SELFCLOSING_TAGS_ : String\l# _AUGMENTATIONS_ : String\l+ _CDATA_SECTIONS_ : String\l -  _DEBUG_BUFFER_ : boolean\l# _DEBUG_CALLBACKS_ : boolean\l -  _DEBUG_CHARSET_ : boolean\l -  _DEBUG_SCANNER_ : boolean\l -  _DEBUG_SCANNER_STATE_ : boolean\l# _DEFAULT_BUFFER_SIZE_ : int\l# _DEFAULT_ENCODING_ : String\l# _DOCTYPE_PUBID_ : String\l# _DOCTYPE_SYSID_ : String\l -  _ENTITY_CHARS_ : BitSet\l# _ERROR_REPORTER_ : String\l+ _FIX_MSWINDOWS_REFS_ : String\l+ _HTML_4_01_FRAMESET_PUBID_ : String\l+ _HTML_4_01_FRAMESET_SYSID_ : String\l+ _HTML_4_01_STRICT_PUBID_ : String\l+ _HTML_4_01_STRICT_SYSID_ : String\l+ _HTML_4_01_TRANSITIONAL_PUBID_ : String\l+ _HTML_4_01_TRANSITIONAL_SYSID_ : String\l+ _IGNORE_SPECIFIED_CHARSET_ : String\l+ _INSERT_DOCTYPE_ : String\l# _NAMES_ATTRS_ : String\l# _NAMES_ELEMS_ : String\l# _NAMES_LOWERCASE_ : short\l# _NAMES_NO_CHANGE_ : short\l# _NAMES_UPPERCASE_ : short\l# _NORMALIZE_ATTRIBUTES_ : String\l+ _NOTIFY_CHAR_REFS_ : String\l+ _NOTIFY_HTML_BUILTIN_REFS_ : String\l+ _NOTIFY_XML_BUILTIN_REFS_ : String\l+ _OVERRIDE_DOCTYPE_ : String\l+ _PARSE_NOSCRIPT_CONTENT_ : String\l -  _RECOGNIZED_FEATURES_ : array[1](String)\l -  _RECOGNIZED_FEATURES_DEFAULTS_ : array[1](Boolean)\l -  _RECOGNIZED_PROPERTIES_ : array[1](String)\l -  _RECOGNIZED_PROPERTIES_DEFAULTS_ : array[1](object)\l -  REPLACEMENT_CHARACTER : char\l# _REPORT_ERRORS_ : String\l+ _SCRIPT_STRIP_CDATA_DELIMS_ : String\l+ _SCRIPT_STRIP_COMMENT_DELIMS_ : String\l# _STATE_CONTENT_ : short\l# _STATE_END_DOCUMENT_ : short\l# _STATE_MARKUP_BRACKET_ : short\l# _STATE_START_DOCUMENT_ : short\l+ _STYLE_STRIP_CDATA_DELIMS_ : String\l+ _STYLE_STRIP_COMMENT_DELIMS_ : String\l# _SYNTHESIZED_ITEM_ : HTMLEventInfo\l# fAllowSelfclosingIframe : boolean\l# fAllowSelfclosingTags : boolean\l# fAugmentations : boolean\l# fBeginCharacterOffset : int\l# fBeginColumnNumber : int\l# fBeginLineNumber : int\l# fByteStream : PlaybackInputStream\l# fCDATASections : boolean\l# fContentScanner : Scanner\l# fCurrentEntity : CurrentEntity\l# FCURRENTENTITYSTACK : Stack\l# fDefaultIANAEncoding : String\l# fDoctypePubid : String\l# fDoctypeSysid : String\l# fDocumentHandler : XMLDocumentHandler\l# fElementCount : int\l# fElementDepth : int\l# fEndCharacterOffset : int\l# fEndColumnNumber : int\l# fEndLineNumber : int\l# fErrorReporter : HTMLErrorReporter\l# fFixWindowsCharRefs : boolean\l# fIANAEncoding : String\l# fIgnoreSpecifiedCharset : boolean\l -  FINFOSETAUGS : HTMLAugmentations\l# fInsertDoctype : boolean\l# fIso8859Encoding : boolean\l# fJavaEncoding : String\l -  FLOCATIONITEM : LocationItem\l# fNamesAttrs : short\l# fNamesElems : short\l -  FNONNORMATTR : XMLStringBuffer\l# fNormalizeAttributes : boolean\l# fNotifyCharRefs : boolean\l# fNotifyHtmlBuiltinRefs : boolean\l# fNotifyXmlBuiltinRefs : boolean\l# fOverrideDoctype : boolean\l# fParseNoFramesContent : boolean\l# fParseNoScriptContent : boolean\l# fReportErrors : boolean\l -  FRESOURCEID : XMLResourceIdentifierImpl\l# fScanner : Scanner\l# fScannerState : short\l# fScriptStripCDATADelims : boolean\l# fScriptStripCommentDelims : boolean\l -  FSINGLEBOOLEAN : array[1](boolean)\l# fSpecialScanner : SpecialScanner\l# FSTRINGBUFFER : XMLStringBuffer\l -  FSTRINGBUFFER2 : XMLStringBuffer\l# fStyleStripCDATADelims : boolean\l# fStyleStripCommentDelims : boolean\l| -  appendChar(str: StringBuffer, value: int) : void\l -  appendChar(value: int, str: XMLStringBuffer) : void\l# _builtinXmlRef_(name: String) : boolean\l+ cleanup(closeall: boolean) : void\l -  endCommentAvailable() : boolean\l -  endsWith(buffer: XMLStringBuffer, string: String) : boolean\l+ evaluateInputSource(inputSource: XMLInputSource) : void\l+ _expandSystemId_(systemId: String, baseSystemId: String) : String\l# _fixURI_(str: String) : String\l# fixWindowsCharacter(origChar: int) : int\l+ getBaseSystemId() : String\l+ getCharacterOffset() : int\l+ getColumnNumber() : int\l+ getDocumentHandler() : XMLDocumentHandler\l+ getEncoding() : String\l+ getExpandedSystemId() : String\l+ getFeatureDefault(featureId: String) : Boolean\l+ getLineNumber() : int\l+ getLiteralSystemId() : String\l# _GETNAMESVALUE_(value: String) : short\l+ getPropertyDefault(propertyId: String) : object\l+ getPublicId() : String\l -  getReader(inputSource: XMLInputSource) : Reader\l+ getRecognizedFeatures() : array[1](String)\l+ getRecognizedProperties() : array[1](String)\l# _getValue_(attrs: XMLAttributes, aname: String) : String\l+ getXMLVersion() : String\lisEncodingCompatible(encoding1: String, encoding2: String) : boolean\l# LOCATIONAUGS() : Augmentations\l# _MODIFYNAME_(mode: short, name: String) : String\l+ pushInputSource(inputSource: XMLInputSource) : void\l# read() : int\l# readPreservingBufferContent() : int\l_reduceToContent_(buffer: XMLStringBuffer, endMarker: String, startMarker: String) : void\l+ reset(manager: XMLComponentManager) : void\l# RESOURCEID() : XMLResourceIdentifier\l# scanDoctype() : void\l+ scanDocument(complete: boolean) : boolean\l# scanEntityRef(str: XMLStringBuffer, content: boolean) : int\l# scanLiteral() : String\l# scanName(strict: boolean) : String\l+ setDocumentHandler(handler: XMLDocumentHandler) : void\l+ setFeature(state: boolean, featureId: String) : void\l+ setInputSource(source: XMLInputSource) : void\l+ setProperty(value: object, propertyId: String) : void\l# setScanner(scanner: Scanner) : void\l# setScannerState(state: short) : void\l# skip(caseSensitive: boolean, s: String) : boolean\l# skipMarkup(balance: boolean) : boolean\l# skipNewlines() : int\l# skipSpaces() : boolean\l# SYNTHESIZEDAUGS() : Augmentations\l}"
+]
+htmlWriter [
+label = "{Writer| -  fCharactersBeginCharacterOffset : int\l -  fCharactersBeginColumn : int\l -  fCharactersBeginLine : int\l -  fCharactersEndCharacterOffset : int\l -  fCharactersEndColumn : int\l -  fCharactersEndLine : int\l -  fInCharacters : boolean\l -  FSTRINGBUFFER : XMLStringBuffer\l# out : PrintWriter\l|Const Writer(writer: Writer)\lConst Writer(encoding: String, stream: OutputStream)\lConst Writer()\lConst Writer(stream: OutputStream)\l+ characters(augs: Augmentations, text: XMLString) : void\l# chars() : void\l+ comment(augs: Augmentations, text: XMLString) : void\l# doAugs(augs: Augmentations) : void\l# doCharactersAugs() : void\l+ doctypeDecl(augs: Augmentations, root: String, sysid: String, pubid: String) : void\l+ emptyElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l+ endCDATA(augs: Augmentations) : void\l+ endDocument(augs: Augmentations) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ ignorableWhitespace(text: XMLString, augs: Augmentations) : void\l+ _main_(argv: array[1](String)) : void\l# print(s: String) : void\l+ processingInstruction(data: XMLString, target: String, augs: Augmentations) : void\l# _sortAttrNames_(attrs: XMLAttributes, auris: array[1](String), anames: array[1](String)) : void\l+ startCDATA(augs: Augmentations) : void\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations) : void\l+ startDocument(locator: XMLLocator, encoding: String, nscontext: NamespaceContext, augs: Augmentations) : void\l+ startElement(element: QName, attrs: XMLAttributes, augs: Augmentations) : void\l# storeCharactersEnd(augs: Augmentations) : void\l# storeCharactersStart(augs: Augmentations) : void\l+ xmlDecl(standalone: String, encoding: String, augs: Augmentations, version: String) : void\l}"
+]
+filtersNamespaceBinder [
+label = "{NamespaceBinder| -  _FEATURE_DEFAULTS_ : array[1](Boolean)\l# _INSERT_NAMESPACES_ : String\l# _NAMESPACES_ : String\l# _NAMESPACES_URI_ : String\l# _NAMES_ATTRS_ : String\l# _NAMES_ELEMS_ : String\l# _NAMES_LOWERCASE_ : short\l# _NAMES_NO_CHANGE_ : short\l# _NAMES_UPPERCASE_ : short\l# _OVERRIDE_NAMESPACES_ : String\l -  _PROPERTY_DEFAULTS_ : array[1](object)\l -  _RECOGNIZED_FEATURES_ : array[1](String)\l -  _RECOGNIZED_PROPERTIES_ : array[1](String)\l+ _XHTML_1_0_URI_ : String\l+ _XMLNS_URI_ : String\l+ _XML_URI_ : String\l# fInsertNamespaces : boolean\l# fNamesAttrs : short\l# fNamesElems : short\l# FNAMESPACECONTEXT : NamespaceSupport\l# fNamespacePrefixes : boolean\l# fNamespaces : boolean\l# fNamespacesURI : String\l# fOverrideNamespaces : boolean\l -  FQNAME : QName\l|# bindNamespaces(element: QName, attrs: XMLAttributes) : void\l+ emptyElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ getFeatureDefault(featureId: String) : Boolean\l# _GETNAMESVALUE_(value: String) : short\l+ getPropertyDefault(propertyId: String) : object\l+ getRecognizedFeatures() : array[1](String)\l+ getRecognizedProperties() : array[1](String)\l# _MODIFYNAME_(mode: short, name: String) : String\l+ reset(manager: XMLComponentManager) : void\l# _splitQName_(qname: QName) : void\l+ startDocument(locator: XMLLocator, encoding: String, nscontext: NamespaceContext, augs: Augmentations) : void\l+ startElement(element: QName, augs: Augmentations, attrs: XMLAttributes) : void\l}"
+]
+htmlSecuritySupport12 [
+label = "{SecuritySupport12||getContextClassLoader() : ClassLoader\lgetFileExists(f: File) : boolean\lgetFileInputStream(file: File) : FileInputStream\lgetLastModified(f: File) : long\lgetParentClassLoader(cl: ClassLoader) : ClassLoader\lgetResourceAsStream(cl: ClassLoader, name: String) : InputStream\lgetSystemClassLoader() : ClassLoader\lgetSystemProperty(propName: String) : String\l}"
+]
+HTMLTagBalancerInfoStack [
+label = "{InfoStack|+ data : array[1](Info)\l+ top : int\l|+ peek() : Info\l+ pop() : Info\l+ push(info: Info) : void\l+ toString() : String\l}"
+]
+filtersIdentity [
+label = "{Identity|# _AUGMENTATIONS_ : String\l# _FILTERS_ : String\l|+ emptyElement(augs: Augmentations, element: QName, attributes: XMLAttributes) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ startElement(attributes: XMLAttributes, element: QName, augs: Augmentations) : void\l# _synthesized_(augs: Augmentations) : boolean\l}"
+]
+sampleScript [
+label = "{Script|# _AUGMENTATIONS_ : String\l# _FILTERS_ : String\l# _SCRIPT_TYPE_ : String\l# fBuffer : StringBuffer\l# fConfiguration : HTMLConfiguration\l# fScriptCount : int\l# fSystemId : String\l|Const Script(config: HTMLConfiguration)\l+ characters(text: XMLString, augs: Augmentations) : void\l+ emptyElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ _main_(argv: array[1](String)) : void\l+ startDocument(locator: XMLLocator, encoding: String, augs: Augmentations) : void\l+ startElement(element: QName, attrs: XMLAttributes, augs: Augmentations) : void\l}"
+]
+NamespaceBinderNamespaceSupport [
+label = "{NamespaceSupport|# fEntries : array[1](Entry)\l# fLevels : array[1](int)\l# fTop : int\l|Const NamespaceSupport()\l+ declarePrefix(prefix: String, uri: String) : boolean\l+ getAllPrefixes() : Enumeration\l+ getDeclaredPrefixAt(index: int) : String\l+ getDeclaredPrefixCount() : int\l+ getParentContext() : NamespaceContext\l+ getPrefix(uri: String) : String\l+ getURI(prefix: String) : String\l+ popContext() : void\l+ pushContext() : void\l+ reset() : void\l}"
+]
+htmlLostText [
+label = "{LostText| -  ENTRIES : List\l|+ add(augs: Augmentations, text: XMLString) : void\l+ isEmpty() : boolean\l+ refeed(tagBalancer: XMLDocumentHandler) : void\l}"
+]
+htmlSecuritySupport [
+label = "{SecuritySupport| -  _SECURITYSUPPORT_ : object\l|getContextClassLoader() : ClassLoader\lgetFileExists(f: File) : boolean\lgetFileInputStream(file: File) : FileInputStream\l_getInstance_() : SecuritySupport\lgetLastModified(f: File) : long\lgetParentClassLoader(cl: ClassLoader) : ClassLoader\lgetResourceAsStream(cl: ClassLoader, name: String) : InputStream\lgetSystemClassLoader() : ClassLoader\lgetSystemProperty(propName: String) : String\l}"
+]
+htmlTestParser [
+label = "{TestParser|MESSAGES : List\l|Const TestParser()\l+ endElement(element: QName, augs: Augmentations) : void\l+ ignoredEndElement(element: QName, augs: Augmentations) : void\l+ ignoredStartElement(augs: Augmentations, element: QName, attrs: XMLAttributes) : void\l+ startElement(element: QName, attributes: XMLAttributes, augs: Augmentations) : void\l}"
+]
+xercesbridgeXercesBridge [
+label = "{XercesBridge| -  _INSTANCE_ : XercesBridge\l|+ NamespaceContext_declarePrefix(ns: String, avalue: String, namespaceContext: NamespaceContext) : void\l+ XMLDocumentFilter_setDocumentSource(lastSource: XMLDocumentSource, filter: XMLDocumentFilter) : void\l+ XMLDocumentHandler_endPrefixMapping(augs: Augmentations, documentHandler: XMLDocumentHandler, prefix: String) : void\l? + XMLDocumentHandler_startDocument(nscontext: NamespaceContext, documentHandler: XMLDocumentHandler, augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ XMLDocumentHandler_startPrefixMapping(prefix: String, uri: String, augs: Augmentations, documentHandler: XMLDocumentHandler) : void\l+ _getInstance_() : XercesBridge\l? + getVersion() : String\l -  _makeInstance_() : XercesBridge\l -  _newInstanceOrNull_(className: String) : XercesBridge\l}"
+]
+sampleTestHTMLDOMFragment [
+label = "{TestHTMLDOMFragment||+ _main_(argv: array[1](String)) : void\l+ _print_(node: Node, indent: String) : void\l}"
+]
+htmlHTMLTagBalancingListenerTest [
+label = "{HTMLTagBalancingListenerTest||+ testIgnoredTags() : void\l+ testReuse() : void\l}"
+]
+parsersSAXParser [
+label = "{SAXParser||Const SAXParser()\l}"
+]
+HTMLElementsElement [
+label = "{Element|+ _BLOCK_ : int\l+ _CONTAINER_ : int\l+ _EMPTY_ : int\l+ _INLINE_ : int\l+ _SPECIAL_ : int\l+ bounds : short\l+ closes : array[1](short)\l+ code : short\l+ flags : int\l+ name : String\l+ parent : array[1](Element)\l+ parentCodes : array[1](short)\l|Const Element(flags: int, code: short, closes: array[1](short), name: String, parents: array[1](short))\lConst Element(parent: short, name: String, closes: array[1](short), flags: int, code: short)\lConst Element(bounds: short, closes: array[1](short), flags: int, code: short, name: String, parents: array[1](short))\lConst Element(bounds: short, closes: array[1](short), parent: short, name: String, flags: int, code: short)\l+ closes(tag: short) : boolean\l+ equals(o: object) : boolean\l+ hashCode() : int\l+ ISBLOCK() : boolean\l+ ISCONTAINER() : boolean\l+ ISEMPTY() : boolean\l+ ISINLINE() : boolean\l+ isParent(element: Element) : boolean\l+ ISSPECIAL() : boolean\l+ toString() : String\l}"
+]
+htmlUTF8BOMSkipper [
+label = "{UTF8BOMSkipper| -  fFirst3Bytes : array[1](int)\l -  fOffset : int\l -  fStart : boolean\l|Const UTF8BOMSkipper(stream: InputStream)\l+ available() : int\l+ markSupported() : boolean\l+ read() : int\l+ read(offset: int, buffer: array[1](byte), length: int) : int\l}"
+]
+HTMLElementsElementList [
+label = "{ElementList|+ data : array[1](Element)\l+ size : int\l|+ addElement(element: Element) : void\l}"
+]
+htmlHTMLConfiguration [
+label = "{HTMLConfiguration|# _AUGMENTATIONS_ : String\l# _BALANCE_TAGS_ : String\l -  _DOCSOURCE_ : array[1](Class)\l# _ERROR_DOMAIN_ : String\l# _ERROR_REPORTER_ : String\l# _FILTERS_ : String\l# _NAMESPACES_ : String\l# _NAMES_ATTRS_ : String\l# _NAMES_ELEMS_ : String\l# _REPORT_ERRORS_ : String\l# _SIMPLE_ERROR_FORMAT_ : String\l# _XERCES_2_0_0_ : boolean\l# _XERCES_2_0_1_ : boolean\l# _XML4J_4_0_x_ : boolean\l# fCloseStream : boolean\l# fDTDContentModelHandler : XMLDTDContentModelHandler\l# fDTDHandler : XMLDTDHandler\l# fDocumentHandler : XMLDocumentHandler\l# FDOCUMENTSCANNER : HTMLScanner\l# fEntityResolver : XMLEntityResolver\l# fErrorHandler : XMLErrorHandler\l# FERRORREPORTER : HTMLErrorReporter\l# FHTMLCOMPONENTS : Vector\l# fLocale : Locale\l# FNAMESPACEBINDER : NamespaceBinder\l# FTAGBALANCER : HTMLTagBalancer\l|Const HTMLConfiguration()\l# addComponent(component: HTMLComponent) : void\l+ cleanup() : void\l# createDocumentScanner() : HTMLScanner\l+ evaluateInputSource(inputSource: XMLInputSource) : void\l+ getDTDContentModelHandler() : XMLDTDContentModelHandler\l+ getDTDHandler() : XMLDTDHandler\l+ getDocumentHandler() : XMLDocumentHandler\l+ getEntityResolver() : XMLEntityResolver\l+ getErrorHandler() : XMLErrorHandler\l+ getLocale() : Locale\l+ parse(complete: boolean) : boolean\l+ parse(source: XMLInputSource) : void\l+ pushInputSource(inputSource: XMLInputSource) : void\l# reset() : void\l+ setDTDContentModelHandler(handler: XMLDTDContentModelHandler) : void\l+ setDTDHandler(handler: XMLDTDHandler) : void\l+ setDocumentHandler(handler: XMLDocumentHandler) : void\l+ setEntityResolver(resolver: XMLEntityResolver) : void\l+ setErrorHandler(handler: XMLErrorHandler) : void\l+ setFeature(featureId: String, state: boolean) : void\l+ setInputSource(inputSource: XMLInputSource) : void\l+ setLocale(locale: Locale) : void\l+ setProperty(propertyId: String, value: object) : void\l}"
+]
+htmlObjectFactory [
+label = "{ObjectFactory| -  _DEBUG_ : boolean\l -  _DEFAULT_LINE_LENGTH_ : int\l -  _DEFAULT_PROPERTIES_FILENAME_ : String\l -  _fLastModified_ : long\l -  _fXercesProperties_ : Properties\l|_createObject_(fallbackClassName: String, factoryId: String) : object\l_createObject_(factoryId: String, propertiesFilename: String, fallbackClassName: String) : object\l -  _debugPrintln_(msg: String) : void\l_findClassLoader_() : ClassLoader\l -  _findJarServiceProvider_(factoryId: String) : object\l_findProviderClass_(cl: ClassLoader, doFallback: boolean, className: String) : Class\l_newInstance_(cl: ClassLoader, doFallback: boolean, className: String) : object\l}"
+]
+htmlHTMLErrorHandler [
+label = "{HTMLErrorHandler| -  OUT_ : Writer\l|Const HTMLErrorHandler(out: Writer)\l+ error(domain: String, exception: XMLParseException, key: String) : void\l -  println(key: String, exception: XMLParseException, type: String) : void\l+ warning(key: String, domain: String, exception: XMLParseException) : void\l}"
+]
+htmlCanonicalTest [
+label = "{CanonicalTest| -  _CANONICALDIR_ : File\l -  dataFile : File\l -  _OUTPUTDIR_ : File\l|Const CanonicalTest(dataFile: File)\l -  getCanonical(infile: File) : String\l -  getResult(infile: File) : String\l# runTest() : void\l+ _suite_() : Test\l}"
+]
+parsersDOMParser [
+label = "{DOMParser||Const DOMParser()\l+ doctypeDecl(augs: Augmentations, sysid: String, pubid: String, root: String) : void\l -  _getParserSubVersion_() : int\l}"
+]
+htmlHTMLTagBalancer [
+label = "{HTMLTagBalancer|# _AUGMENTATIONS_ : String\l# _DOCUMENT_FRAGMENT_ : String\l# _DOCUMENT_FRAGMENT_DEPRECATED_ : String\l# _ERROR_REPORTER_ : String\l+ _FRAGMENT_CONTEXT_STACK_ : String\l# _IGNORE_OUTSIDE_CONTENT_ : String\l# _NAMESPACES_ : String\l# _NAMES_ATTRS_ : String\l# _NAMES_ELEMS_ : String\l# _NAMES_LOWERCASE_ : short\l# _NAMES_MATCH_ : short\l# _NAMES_NO_CHANGE_ : short\l# _NAMES_UPPERCASE_ : short\l -  _RECOGNIZED_FEATURES_ : array[1](String)\l -  _RECOGNIZED_FEATURES_DEFAULTS_ : array[1](Boolean)\l -  _RECOGNIZED_PROPERTIES_ : array[1](String)\l -  _RECOGNIZED_PROPERTIES_DEFAULTS_ : array[1](object)\l# _REPORT_ERRORS_ : String\l# _SYNTHESIZED_ITEM_ : HTMLEventInfo\l -  endElementsBuffer_ : List\l# fAllowSelfclosingIframe : boolean\l# fAllowSelfclosingTags : boolean\l# fAugmentations : boolean\l# fDocumentFragment : boolean\l# fDocumentHandler : XMLDocumentHandler\l# fDocumentSource : XMLDocumentSource\l# FELEMENTSTACK : InfoStack\l -  FEMPTYATTRS : XMLAttributes\l# fErrorReporter : HTMLErrorReporter\l# fIgnoreOutsideContent : boolean\l -  FINFOSETAUGS : HTMLAugmentations\l# FINLINESTACK : InfoStack\l# fNamesAttrs : short\l# fNamesElems : short\l# fNamespaces : boolean\l# fOpenedForm : boolean\l -  FQNAME : QName\l# fReportErrors : boolean\l# fSeenAnything : boolean\l# fSeenBodyElement : boolean\l -  fSeenBodyElementEnd : boolean\l# fSeenDoctype : boolean\l -  fSeenFramesetElement : boolean\l# fSeenHeadElement : boolean\l# fSeenRootElement : boolean\l# fSeenRootElementEnd : boolean\l -  forcedEndElement_ : boolean\l -  forcedStartElement_ : boolean\l -  fragmentContextStackSize_ : int\l -  fragmentContextStack_ : array[1](QName)\l -  lostText_ : LostText\l# tagBalancingListener : HTMLTagBalancingListener\l|# CALLENDELEMENT(augs: Augmentations, element: QName) : void\l# CALLSTARTELEMENT(element: QName, attrs: XMLAttributes, augs: Augmentations) : void\l+ characters(text: XMLString, augs: Augmentations) : void\l+ comment(augs: Augmentations, text: XMLString) : void\l -  consumeBufferedEndElements() : void\l -  consumeEarlyTextIfNeeded() : void\l -  createQName(tagName: String) : QName\l+ doctypeDecl(augs: Augmentations, publicId: String, systemId: String, rootElementName: String) : void\l# EMPTYATTRIBUTES() : XMLAttributes\l+ emptyElement(element: QName, attrs: XMLAttributes, augs: Augmentations) : void\l+ endCDATA(augs: Augmentations) : void\l+ endDocument(augs: Augmentations) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ endGeneralEntity(augs: Augmentations, name: String) : void\l+ endPrefixMapping(prefix: String, augs: Augmentations) : void\l -  forceStartBody() : void\l -  forceStartElement(elem: QName, attrs: XMLAttributes, augs: Augmentations) : boolean\l+ getDocumentHandler() : XMLDocumentHandler\l+ getDocumentSource() : XMLDocumentSource\l# getElement(elementName: QName) : Element\l# GETELEMENTDEPTH(element: Element) : int\l+ getFeatureDefault(featureId: String) : Boolean\l# _GETNAMESVALUE_(value: String) : short\l# getParentDepth(bounds: short, parents: array[1](Element)) : int\l+ getPropertyDefault(propertyId: String) : object\l+ getRecognizedFeatures() : array[1](String)\l+ getRecognizedProperties() : array[1](String)\l+ ignorableWhitespace(augs: Augmentations, text: XMLString) : void\l# _MODIFYNAME_(mode: short, name: String) : String\l -  notifyDiscardedEndElement(augs: Augmentations, element: QName) : void\l -  notifyDiscardedStartElement(attrs: XMLAttributes, elem: QName, augs: Augmentations) : void\l+ processingInstruction(augs: Augmentations, data: XMLString, target: String) : void\l+ reset(manager: XMLComponentManager) : void\l+ setDocumentHandler(handler: XMLDocumentHandler) : void\l+ setDocumentSource(source: XMLDocumentSource) : void\l+ setFeature(featureId: String, state: boolean) : void\l+ setProperty(propertyId: String, value: object) : void\lsetTagBalancingListener(tagBalancingListener: HTMLTagBalancingListener) : void\l+ startCDATA(augs: Augmentations) : void\l+ startDocument(augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ startDocument(augs: Augmentations, nscontext: NamespaceContext, locator: XMLLocator, encoding: String) : void\l+ startElement(attrs: XMLAttributes, elem: QName, augs: Augmentations) : void\l+ startGeneralEntity(id: XMLResourceIdentifier, augs: Augmentations, name: String, encoding: String) : void\l+ startPrefixMapping(prefix: String, uri: String, augs: Augmentations) : void\l# SYNTHESIZEDAUGS() : Augmentations\l+ textDecl(version: String, encoding: String, augs: Augmentations) : void\l+ xmlDecl(augs: Augmentations, standalone: String, version: String, encoding: String) : void\l}"
+]
+filtersWriter [
+label = "{Writer|# _AUGMENTATIONS_ : String\l# _FILTERS_ : String\l+ _NOTIFY_CHAR_REFS_ : String\l+ _NOTIFY_HTML_BUILTIN_REFS_ : String\l# fElementDepth : int\l# fEncoding : String\l# fNormalize : boolean\l# fPrintChars : boolean\l# fPrinter : PrintWriter\l# fSeenHttpEquiv : boolean\l# fSeenRootElement : boolean\l|Const Writer(encoding: String, outputStream: OutputStream)\lConst Writer(writer: Writer, encoding: String)\lConst Writer()\l+ characters(text: XMLString, augs: Augmentations) : void\l+ comment(augs: Augmentations, text: XMLString) : void\l+ emptyElement(attributes: XMLAttributes, element: QName, augs: Augmentations) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ endGeneralEntity(augs: Augmentations, name: String) : void\l+ _main_(argv: array[1](String)) : void\l# printAttributeValue(text: String) : void\l# printCharacters(text: XMLString, normalize: boolean) : void\l# printEndElement(element: QName) : void\l# printEntity(name: String) : void\l# printStartElement(element: QName, attributes: XMLAttributes) : void\l -  _printUsage_() : void\l+ startDocument(augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ startDocument(augs: Augmentations, nscontext: NamespaceContext, locator: XMLLocator, encoding: String) : void\l+ startElement(attributes: XMLAttributes, augs: Augmentations, element: QName) : void\l+ startGeneralEntity(encoding: String, id: XMLResourceIdentifier, augs: Augmentations, name: String) : void\l}"
+]
+filtersDefaultFilter [
+label = "{DefaultFilter|# fDocumentHandler : XMLDocumentHandler\l# fDocumentSource : XMLDocumentSource\l|+ characters(text: XMLString, augs: Augmentations) : void\l+ comment(augs: Augmentations, text: XMLString) : void\l+ doctypeDecl(augs: Augmentations, root: String, publicId: String, systemId: String) : void\l+ emptyElement(attributes: XMLAttributes, element: QName, augs: Augmentations) : void\l+ endCDATA(augs: Augmentations) : void\l+ endDocument(augs: Augmentations) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ endGeneralEntity(augs: Augmentations, name: String) : void\l+ endPrefixMapping(prefix: String, augs: Augmentations) : void\l+ getDocumentHandler() : XMLDocumentHandler\l+ getDocumentSource() : XMLDocumentSource\l+ getFeatureDefault(featureId: String) : Boolean\l+ getPropertyDefault(propertyId: String) : object\l+ getRecognizedFeatures() : array[1](String)\l+ getRecognizedProperties() : array[1](String)\l+ ignorableWhitespace(augs: Augmentations, text: XMLString) : void\l# _merge_(array1: array[1](String), array2: array[1](String)) : array[1](String)\l+ processingInstruction(augs: Augmentations, data: XMLString, target: String) : void\l+ reset(componentManager: XMLComponentManager) : void\l+ setDocumentHandler(handler: XMLDocumentHandler) : void\l+ setDocumentSource(source: XMLDocumentSource) : void\l+ setFeature(state: boolean, featureId: String) : void\l+ setProperty(propertyId: String, value: object) : void\l+ startCDATA(augs: Augmentations) : void\l+ startDocument(augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ startDocument(augs: Augmentations, nscontext: NamespaceContext, locator: XMLLocator, encoding: String) : void\l+ startElement(attributes: XMLAttributes, augs: Augmentations, element: QName) : void\l+ startGeneralEntity(encoding: String, id: XMLResourceIdentifier, augs: Augmentations, name: String) : void\l+ startPrefixMapping(prefix: String, uri: String, augs: Augmentations) : void\l+ textDecl(version: String, encoding: String, augs: Augmentations) : void\l+ xmlDecl(augs: Augmentations, standalone: String, version: String, encoding: String) : void\l}"
+]
+HTMLConfigurationErrorReporter [
+label = "{ErrorReporter|# fErrorMessages : ResourceBundle\l# fLastLocale : Locale\l|# createException(key: String, args: array[1](object)) : XMLParseException\l+ formatMessage(key: String, args: array[1](object)) : String\l# formatSimpleMessage(key: String, args: array[1](object)) : String\l+ reportError(key: String, args: array[1](object)) : void\l+ reportWarning(args: array[1](object), key: String) : void\l}"
+]
+htmlHTMLScannerTest [
+label = "{HTMLScannerTest||+ testChangeEncodingWithReader() : void\l+ testEvaluateInputSource() : void\l+ testInfiniteLoop() : void\l+ testLocale() : void\l+ testReduceToContent() : void\l+ testisEncodingCompatible() : void\l}"
+]
+filtersElementRemover [
+label = "{ElementRemover|# _NULL_ : object\l# fAcceptedElements : Hashtable\l# fElementDepth : int\l# fRemovalElementDepth : int\l# fRemovedElements : Hashtable\l|+ acceptElement(element: String, attributes: array[1](String)) : void\l+ characters(text: XMLString, augs: Augmentations) : void\l+ comment(augs: Augmentations, text: XMLString) : void\l# elementAccepted(element: String) : boolean\l# elementRemoved(element: String) : boolean\l+ emptyElement(element: QName, attributes: XMLAttributes, augs: Augmentations) : void\l+ endCDATA(augs: Augmentations) : void\l+ endElement(augs: Augmentations, element: QName) : void\l+ endGeneralEntity(augs: Augmentations, name: String) : void\l+ endPrefixMapping(prefix: String, augs: Augmentations) : void\l# handleOpenTag(element: QName, attributes: XMLAttributes) : boolean\l+ ignorableWhitespace(augs: Augmentations, text: XMLString) : void\l+ processingInstruction(augs: Augmentations, data: XMLString, target: String) : void\l+ removeElement(element: String) : void\l+ startCDATA(augs: Augmentations) : void\l+ startDocument(augs: Augmentations, locator: XMLLocator, encoding: String) : void\l+ startDocument(augs: Augmentations, nscontext: NamespaceContext, locator: XMLLocator, encoding: String) : void\l+ startElement(attributes: XMLAttributes, augs: Augmentations, element: QName) : void\l+ startGeneralEntity(encoding: String, id: XMLResourceIdentifier, augs: Augmentations, name: String) : void\l+ startPrefixMapping(prefix: String, uri: String, augs: Augmentations) : void\l+ textDecl(version: String, encoding: String, augs: Augmentations) : void\l}"
+]
+htmlHTMLAugmentations [
+label = "{HTMLAugmentations|# FITEMS : Hashtable\l|Const HTMLAugmentations(augs: Augmentations)\lConst HTMLAugmentations()\l+ clear() : void\l+ getItem(key: String) : object\l+ keys() : Enumeration\l+ putItem(item: object, key: String) : object\l+ removeAllItems() : void\l+ removeItem(key: String) : object\l}"
+]
+InfiniteLoopScannerMyContentScanner [
+label = "{MyContentScanner||# scanComment() : void\l}"
+]
+HTMLScannerLocationItem [
+label = "{LocationItem|# fBeginCharacterOffset : int\l# fBeginColumnNumber : int\l# fBeginLineNumber : int\l# fEndCharacterOffset : int\l# fEndColumnNumber : int\l# fEndLineNumber : int\l|Const LocationItem()\lConst LocationItem(other: LocationItem)\l+ getBeginCharacterOffset() : int\l+ getBeginColumnNumber() : int\l+ getBeginLineNumber() : int\l+ getEndCharacterOffset() : int\l+ getEndColumnNumber() : int\l+ getEndLineNumber() : int\l+ isSynthesized() : boolean\l+ setValues(endOffset: int, endLine: int, endColumn: int, beginOffset: int, beginLine: int, beginColumn: int) : void\l+ toString() : String\l}"
+]
+sampleRemoveElements [
+label = "{RemoveElements||+ _main_(argv: array[1](String)) : void\l}"
+]
+IntPropertiesEntry [
+label = "{Entry|+ key : int\l+ next : Entry\l+ value : String\l|Const Entry(next: Entry, key: int, value: String)\l}"
+]
+htmlHTMLElements [
+label = "{HTMLElements|+ _A_ : short\l+ _ABBR_ : short\l+ _ACRONYM_ : short\l+ _ADDRESS_ : short\l+ _APPLET_ : short\l+ _AREA_ : short\l+ _B_ : short\l+ _BASE_ : short\l+ _BASEFONT_ : short\l+ _BDO_ : short\l+ _BGSOUND_ : short\l+ _BIG_ : short\l+ _BLINK_ : short\l+ _BLOCKQUOTE_ : short\l+ _BODY_ : short\l+ _BR_ : short\l+ _BUTTON_ : short\l+ _CAPTION_ : short\l+ _CENTER_ : short\l+ _CITE_ : short\l+ _CODE_ : short\l+ _COL_ : short\l+ _COLGROUP_ : short\l+ _COMMENT_ : short\l+ _DD_ : short\l+ _DEL_ : short\l+ _DFN_ : short\l+ _DIR_ : short\l+ _DIV_ : short\l+ _DL_ : short\l+ _DT_ : short\l# _ELEMENTS_ : ElementList\l# _ELEMENTS_ARRAY_ : array[2](array[1](Element))\l+ _EM_ : short\l+ _EMBED_ : short\l+ _FIELDSET_ : short\l+ _FONT_ : short\l+ _FORM_ : short\l+ _FRAME_ : short\l+ _FRAMESET_ : short\l+ _H1_ : short\l+ _H2_ : short\l+ _H3_ : short\l+ _H4_ : short\l+ _H5_ : short\l+ _H6_ : short\l+ _HEAD_ : short\l+ _HR_ : short\l+ _HTML_ : short\l+ _I_ : short\l+ _IFRAME_ : short\l+ _ILAYER_ : short\l+ _IMG_ : short\l+ _INPUT_ : short\l+ _INS_ : short\l+ _ISINDEX_ : short\l+ _KBD_ : short\l+ _KEYGEN_ : short\l+ _LABEL_ : short\l+ _LAYER_ : short\l+ _LEGEND_ : short\l+ _LI_ : short\l+ _LINK_ : short\l+ _LISTING_ : short\l+ _MAP_ : short\l+ _MARQUEE_ : short\l+ _MENU_ : short\l+ _META_ : short\l+ _MULTICOL_ : short\l+ _NEXTID_ : short\l+ _NOBR_ : short\l+ _NOEMBED_ : short\l+ _NOFRAMES_ : short\l+ _NOLAYER_ : short\l+ _NOSCRIPT_ : short\l+ _NO_SUCH_ELEMENT_ : Element\l+ _OBJECT_ : short\l+ _OL_ : short\l+ _OPTGROUP_ : short\l+ _OPTION_ : short\l+ _P_ : short\l+ _PARAM_ : short\l+ _PLAINTEXT_ : short\l+ _PRE_ : short\l+ _Q_ : short\l+ _RB_ : short\l+ _RBC_ : short\l+ _RP_ : short\l+ _RT_ : short\l+ _RTC_ : short\l+ _RUBY_ : short\l+ _S_ : short\l+ _SAMP_ : short\l+ _SCRIPT_ : short\l+ _SECTION_ : short\l+ _SELECT_ : short\l+ _SMALL_ : short\l+ _SOUND_ : short\l+ _SPACER_ : short\l+ _SPAN_ : short\l+ _STRIKE_ : short\l+ _STRONG_ : short\l+ _STYLE_ : short\l+ _SUB_ : short\l+ _SUP_ : short\l+ _TABLE_ : short\l+ _TBODY_ : short\l+ _TD_ : short\l+ _TEXTAREA_ : short\l+ _TFOOT_ : short\l+ _TH_ : short\l+ _THEAD_ : short\l+ _TITLE_ : short\l+ _TR_ : short\l+ _TT_ : short\l+ _U_ : short\l+ _UL_ : short\l+ _UNKNOWN_ : short\l+ _VAR_ : short\l+ _WBR_ : short\l+ _XML_ : short\l+ _XMP_ : short\l|+ _GETELEMENT_(ename: String) : Element\l+ _GETELEMENT_(element: Element, ename: String) : Element\l+ _GETELEMENT_(code: short) : Element\l}"
+]
+HTMLScannerCurrentEntity [
+label = "{CurrentEntity|+ BASESYSTEMID : String\l+ buffer : array[1](char)\l+ characterOffset_ : int\l -  columnNumber_ : int\l -  encoding : String\l -  endReached_ : boolean\l+ EXPANDEDSYSTEMID : String\l+ length : int\l -  lineNumber_ : int\l+ LITERALSYSTEMID : String\l+ offset : int\l+ PUBLICID : String\l -  stream_ : Reader\l+ VERSION : String\l|Const CurrentEntity(encoding: String, baseSystemId: String, literalSystemId: String, stream: Reader, expandedSystemId: String, publicId: String)\l -  closeQuietly() : void\l -  debugBufferIfNeeded(prefix: String) : void\l -  debugBufferIfNeeded(suffix: String, prefix: String) : void\l -  getCharacterOffset() : int\l -  getColumnNumber() : int\l -  getCurrentChar() : char\l+ getLineNumber() : int\l -  getNextChar() : char\lhasNext() : boolean\l -  incLine() : void\l -  incLine(nbLines: int) : void\l# load(offset: int) : int\l# read() : int\l -  resetBuffer(lineNumber: int, columnNumber: int, buffer: XMLStringBuffer, characterOffset: int) : void\l -  restorePosition(originalOffset: int, originalColumnNumber: int, originalCharacterOffset: int) : void\l -  rewind() : void\l -  rewind(i: int) : void\l -  setStream(inputStreamReader: InputStreamReader) : void\l}"
+]
+HTMLEntitiesIntProperties [
+label = "{IntProperties| -  entries : array[1](Entry)\l|+ get(key: int) : String\l+ put(value: String, key: int) : void\l}"
+]
+HTMLScannerTestInfiniteLoopScanner [
+label = "{InfiniteLoopScanner||Const InfiniteLoopScanner()\l}"
+]
+htmlFragmentContextStackTest [
+label = "{FragmentContextStackTest|| -  doTest(expected: String, contextStack: array[1](String), html: String) : void\l+ testFragmentShouldNotCloseContextStack() : void\l+ testSimple() : void\l+ testTR() : void\l -  toQNames(tags: array[1](String)) : array[1](QName)\l}"
+]
+xercesbridgeXercesBridge_2_2 [
+label = "{XercesBridge_2_2||Const XercesBridge_2_2()\l+ XMLDocumentFilter_setDocumentSource(lastSource: XMLDocumentSource, filter: XMLDocumentFilter) : void\l+ XMLDocumentHandler_startDocument(augs: Augmentations, nscontext: NamespaceContext, documentHandler: XMLDocumentHandler, locator: XMLLocator, encoding: String) : void\l+ XMLDocumentHandler_startPrefixMapping(prefix: String, augs: Augmentations, uri: String, documentHandler: XMLDocumentHandler) : void\l+ getVersion() : String\l}"
+]
+LostTextEntry [
+label = "{Entry| -  augs_ : Augmentations\l -  text_ : XMLString\l|Const Entry(text: XMLString, augs: Augmentations)\l}"
+]
+htmlHTMLEntities [
+label = "{HTMLEntities|# _ENTITIES_ : Map\l# _SEITITNE_ : IntProperties\l|+ _get_(c: int) : String\l+ _get_(name: String) : int\l -  _load0_(filename: String, props: Properties) : void\l}"
+]
+htmlDOMFragmentParserTest [
+label = "{DOMFragmentParserTest|| -  doTest(html: String, expected: String) : void\l+ _print_(node: Node, indent: String) : void\l+ testAttrEndingWithCRAtEndOfStream() : void\l+ testInstanceReuse() : void\l+ testInvalidAttributeName() : void\l+ testInvalidProcessingInstruction() : void\l}"
+]
+edge[arrowhead = "empty"; style= "solid"]
+filtersElementRemover -> filtersDefaultFilter;
+filtersWriter -> filtersDefaultFilter;
+InfiniteLoopScannerMyContentScanner -> HTMLScannerContentScanner;
+xercesbridgeXercesBridge_2_0 -> xercesbridgeXercesBridge;
+xercesbridgeXercesBridge_2_1 -> xercesbridgeXercesBridge;
+xercesbridgeXercesBridge_2_2 -> xercesbridgeXercesBridge;
+xercesbridgeXercesBridge_2_3 -> xercesbridgeXercesBridge_2_2;
+filtersPurifier -> filtersDefaultFilter;
+sampleScript -> filtersDefaultFilter;
+filtersIdentity -> filtersDefaultFilter;
+filtersNamespaceBinder -> filtersDefaultFilter;
+htmlWriter -> filtersDefaultFilter;
+HTMLScannerTestEvaluateInputSourceFilter -> filtersDefaultFilter;
+sampleMinimal -> filtersDefaultFilter;
+htmlSecuritySupport12 -> htmlSecuritySupport;
+HTMLScannerTestInfiniteLoopScanner -> htmlHTMLScanner;
+edge[arrowhead = "empty"; style = "dashed"]
+edge[arrowhead = "open"; style = "solid"]
+LostTextEntry -> htmlHTMLAugmentations;
+htmlHTMLScanner -> HTMLScannerCurrentEntity;
+HTMLTagBalancerInfo -> HTMLElementsElement;
+htmlLostText -> LostTextEntry;
+filtersPurifier -> NamespaceBinderNamespaceSupport;
+HTMLTagBalancerInfoStack -> HTMLTagBalancerInfo;
+htmlHTMLScanner -> HTMLScannerPlaybackInputStream;
+NamespaceBinderNamespaceSupport -> NamespaceSupportEntry;
+HTMLScannerTestEvaluateInputSourceFilter -> utilParserConfigurationSettings;
+HTMLEntitiesIntProperties -> IntPropertiesEntry;
+HTMLTagBalancerElementEntry -> htmlHTMLAugmentations;
+htmlHTMLTagBalancer -> HTMLTagBalancerElementEntry;
+parsersDOMFragmentParser -> utilParserConfigurationSettings;
+htmlHTMLScanner -> HTMLScannerContentScanner;
+edge[arrowhead = "open"; style = "dashed"]
+htmlHTMLTagBalancer -> HTMLTagBalancerInfo;
+sampleRemoveElements -> filtersElementRemover;
+htmlHTMLElements -> HTMLElementsElement;
+sampleRemoveElements -> filtersWriter;
+htmlHTMLScannerTest -> HTMLScannerTestEvaluateInputSourceFilter;
+sampleTestHTMLDOMFragment -> parsersDOMFragmentParser;
+htmlLocatorEncodingTest -> parsersSAXParser;
+htmlHTMLAugmentations -> HTMLScannerLocationItem;
+HTMLScannerContentScanner -> HTMLScannerLocationItem;
+htmlHTMLScannerTest -> htmlHTMLScanner;
+HTMLScannerContentScanner -> HTMLElementsElement;
+htmlHTMLTagBalancingListenerTest -> htmlTestParser;
+htmlHTMLTagBalancer -> HTMLElementsElement;
+htmlDOMFragmentParserTest -> parsersDOMFragmentParser;
+}

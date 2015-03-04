@@ -5,6 +5,8 @@
 \usepackage{url}
 \usepackage[superscript]{cite}
 \usepackage{listings}
+\usepackage[titletoc,toc]{appendix}
+\usepackage{pdfpages}
 
 %----------------------- Macros and Definitions --------------------------
 
@@ -30,12 +32,14 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[RO,LE]{\sffamily\bfseries\large Technische universiteit Eindhoven}
-\fancyhead[LO,RE]{\sffamily\bfseries\large 2IV35 Visualization}
+\fancyhead[LO,RE]{\sffamily\bfseries\large 2IS55 Software Evolution}
 \fancyfoot[LO,RE]{\sffamily\bfseries\large department of mathematics and computer science}
 \fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{0pt}
 
+% Render all dot files
+\immediate\write18{php dotFiles/renderAll.php}
 
 %-------------------------------- Title ----------------------------------
 
@@ -53,32 +57,32 @@
 
 
 \section{Introduction}
-UML Class diagrams are usually the basis of software development. Using these class diagrams programmers can get a lot of information about the inner workings of the program: the basic structure, ways to divide up the work, etcetera. It is even possible to derive the basis of the code from these diagrams which helps speed up projects. \\
+UML Class diagrams are usually the basis of software development. Using these class diagrams programmers can get a lot of information about the inner workings of the program before they start programming: the basic structure, ways to divide up the work, etcetera. It is even possible to derive the basis of the code from these diagrams which helps speed up projects. \\
 
-The reverse also applies, going from implementation back to a higher level - in our case the UML diagram - will give a representation of the actual implemented architecture. Since we abstracted from the implementation it is much easier to analyse the architecture, especially when analysing two distinct versions of the code. Since it enables the analysis of the actual evolution of the project. \\
+The reverse also applies, going from implementation back to a higher level - in our case the UML class diagram - will give a representation of the actual implemented architecture. Since we abstracted from the implementation it is much easier to analyse the architecture, especially when analysing two distinct versions of the code. Since it enables the analysis of the actual evolution of the project in an easy manner. \\
 
-In this paper we will be presenting a method of generating UML class diagrams from Java projects, implemented in the the Rascal\cite{url:rascal} DSL which is suited for software analysis.  We start by describing the input and output required in section \ref{sec:inputoutput}. Section \ref{sec:tooldescription} describes the toolchain itself, how it works and how it should be used. The actual application of the toolchain will be in section \ref{sec:toolapplication} where we will apply it to analyse two different versions of the CyberNeko HTML parser\cite{url:cyberneko}. Lastly,  sections  \ref{sec:discussion} and  \ref{sec:conclusion} will contain the discussion and conclusion respectively.
+In this paper we will be presenting a method of generating UML class diagrams from Java projects, implemented in the the Rascal\cite{url:rascal} DSL which is designed for software analysis.  We start by describing the input and output required in section \ref{sec:inputoutput}. Section \ref{sec:tooldescription} describes the toolchain itself, how it works and how it should be used. The actual application of the toolchain will be in section \ref{sec:toolapplication} where we will apply it to analyse two different versions of the CyberNeko HTML parser\cite{url:cyberneko}. Lastly,  sections  \ref{sec:discussion} and  \ref{sec:conclusion} will contain the discussion and conclusion respectively.
 
 
 \section{Input and output}
 \label{sec:inputoutput}
-In this section we describe the input and output structure of our toolchain. In section \ref{sec:featuresupport} we will state the implemented and unimplemented features of the toolchain and how these are represented in the output (UML diagram).
+In this section we describe the input and output structure of our toolchain. In section \ref{sec:featuresupport} we will state the implemented and unimplemented features of the toolchain and how these are represented in the output (UML class diagram).
 
 \subsection{Input}
 \label{sec:input}
-Since our toolchain operates over a software project we need the location of the sourcefiles. Since we are using Rascal - which works best through the Eclipse IDE\cite{url:eclipse} - we require that the sourcefiles are contained within an Eclipse project. Since we are generating a UML diagram in the form of a dot file - which can be parsed to a large number of document formats (PDF, PNG, etc.) using Graphviz\cite{url:graphviz} - we also need the location of this file as input.
+Since our toolchain operates on a software project we need the location of the sourcefiles. Since we are using Rascal - which works best through the Eclipse IDE\cite{url:eclipse} - we require that the sourcefiles are contained within an Eclipse project. Since we are generating an UML class diagram in the form of a dot file - which can be parsed to a large number of document formats (PDF, PNG, etc.) using Graphviz\cite{url:graphviz} - we also need the location of this file as input.
 
 \subsubsection{Feature support}
 \label{sec:featuresupport}
-We noticed that the sources of the CyberNeko parse contained multiple classes with the same name, but they existed in different packages. Therefor we implemented basic package support, making sure that these classes were displayed seperately. The UML diagram itself does not display these packages however, we wanted to implement this too, but were unable to do this due to time constraints. \\
+We noticed that the sources of the CyberNeko parse contained multiple classes with the same name, but they existed in different packages. Therefore we implemented basic package support, making sure that these classes were displayed separately. The UML diagram itself does not display these packages however, we wanted to implement this too, but were unable to do this due to time constraints. \\
 
-One of the major language features of java is support for multiple classes in the same file, so called ``inner classes'' which we have filtered out and added to our export too. Generics on the other hand are not implemented, since in our sources we did not find a reference to a generic type. It could however, be implemented quite easily, by changing the function which translates the TypeSet to a human readable string. Everything is in place to add this feature,  adding a loop and a translation to human readable string is everything that needs to added to complete this feature.
+One of the major language features of java is support for multiple classes in the same file, so called ``inner classes'' which we have filtered out and added to our export too. Generics on the other hand are not implemented, since in our sources we did not find a single reference to a generic type. It could however, be implemented quite easily, by changing the function which translates the TypeSet to a human readable string. Everything is in place to add this feature, adding a loop and a translation to human readable string is everything that needs to added to complete this feature.
 
 \subsection{Output}
 \label{sec:output}
-The output of the toolchain consists of a dot-file which can be used by Graphviz\ref{url:graphviz} to render a human viewable document in a desired format (PDF, PNG, etc.). We chose the dot format, since it makes the process of building the UML diagram itself much easier, since we can leave the actual rendering to an existing program. Furthermore, the dot file is a plaintext file which makes it very simple to generate programmatically. \\
+The output of the toolchain consists of a dot-file which can be used by Graphviz\cite{url:graphviz} to render a human viewable document in a desired format. We chose the dot format, since it makes the process of building the UML diagram itself much easier, since we can leave the actual rendering to an existing program. Furthermore, the dot file is a plaintext file which makes it very simple to generate programmatically. \\
 
-UML class diagrams consist of tables of 1 column and 3 rows representing a class. The first row in the table contains the classname, the second row all fields of the class, and the third row the methods of the class. As in many programming languages, in Java the methods and fields have visibility modifiers which we have modelled as follows:
+UML class diagrams consist of tables of 1 column and 3 rows representing classes. The first row in the table contains the classname, the second row all fields of the class while the third row contains all methods of the class. As in many programming languages, Java's methods and fields have visibility modifiers which we have modelled as follows:
 
 \begin{itemize}
 \item {\sc Public} as is normal in UML, public fields are modelled with a plus-sign prefixed to the name. 
@@ -88,19 +92,40 @@ UML class diagrams consist of tables of 1 column and 3 rows representing a class
 \item {\sc Static} normally static fields are modelled by underlining the field. Since this was tough to get to work properly with the dot-format, we chose to model it by adding an underscore as prefix and suffix to the fieldname.
 \end{itemize}
 
-We chose not to implement support for named associations since it became apparent that it is very difficult to implement this in such a way that one can reasonably assume that the reverse engineering to be correct. Furthermore, we are interested in the actual implemented architecture instead of the original intent of the designer. Which diminishes the usefulness of named associations.\\
+All constructors are place first in the methods list and are prefixed with ``Const'' to signify that they are a constructor. \\
+
+We chose not to implement support for named associations since it became apparent that it is very difficult to implement this in such a way that one can reasonably assume the reverse engineering to be correct. Furthermore, we are interested in the actual implemented architecture instead of the original intent of the designer(s). Which diminishes the usefulness of named associations.\\
 
 We are however showing multiplicities, although not in a normal matter by displaying them on the edges, but through the field/method definitions. Whenever an array is shown it indicates a larger than one multiplicity while single value fields have a multiplicity of one. \\
 
-
 \section{Toolchain description}
 \label{sec:tooldescription}
-aaa
+As explained before our toolchain consists of 2 distinct parts, the part we have implemented in Rascal and gerates a dot file. This file is then used by GraphViz\cite{url:graphviz} to generate the actual viewable UML class diagram. \\
+
+Since our tool is written in Rascal we have a few special resources available. Firstly we get the M3 format, which can be used to get a large set of properties over the source code which we want to analyze without much effort. These properties are amongst others:
+
+\begin{itemize}
+\item Classes
+\item Methods of the classes
+\item Fields of the classes
+\item Modifiers of the fields and methods (Static, Private, etc.)
+\item Parameters of the methods
+\item Return types of the methods
+\end{itemize}
+
+Since this format was easy to query we used this as much as possibe, using purely the M3 model we managed to build the basic UML class diagram and could display all generalisations and realisations. Rascal also has a library available which could derive a model used in the Object Flow Graph algorithm. Using this and the algorithm we generated all other information required to deduce the associations and dependencies. \\
+
+Just using the generated associations and dependencies is not good enough, since we have many superfluous edges. For instance all self loops have to be pruned, but also some edges which arrive due to the generalization principle. Whenever a class {\sc A} is associated with all generalisations of a class {\sc B} we will replace it with a single association with {\sc B} decreasing the number of edges quite dramatically. The same principle we apply to the dependencies. \\
+
+When generating the associations we make use of Object Flow Graph algorithm, specified the book by Tonella and Potrich\cite{book:book} and in the slidesets of 2IS55\cite{url:slideset}. The book furthmore contains the needed gen-sets to determine the type of actually allocated objects referenced by program locations and the gen sets to determine the type of objects stored inside weakly typed containers, accounting for object insertions and based on allocation information. Using these gen sets we use the propagation algorithm described and provided\cite{url:jurgen} to us to do the forwards and backwards propagation. \\
+
+When working we used a top down approach, which enabled us to build to a complete solution while being able to allready see our results instead of having to implement everything first and then start a bugfixing phase.
+
 
 \subsection{Usage}
-As stated in the introduction, the tool is built using the DSL Rascal, therefore having a working Rascal installation is required before we can run the toolchain. We make heavy use of the Rascal-OFG\cite{url:rascalofg} library for initially converting the source files to a rascal {\sc Program} which we could use to build the Object Flow Graph. \\
+As stated in the introduction, the tool is built using the DSL Rascal, therefore having a working Rascal installation is required before we can run the toolchain. We make heavy use of the Rascal-OFG\cite{url:rascalofg} library for initially converting the source files to a Rascal {\sc Program} which we could use to build the Object Flow Graph. \\
 
-The toolchain itself consists of the two Rascal modules, where {\sc BuildDiagram.rsc} is responsible for the actual building of the UML class diagram, {\sc ObjectFlow.rsc} is responsible for the Object Flow Graph used in {\sc ObjectFlow.rsc}.  We assume for the stated examples that Rascal is run from the Eclipse IDE. \\
+The first part of the toolchain consists of two Rascal modules, {\sc BuildDiagram.rsc} is responsible for the building of the UML class diagram, while {\sc ObjectFlow.rsc} is responsible for the Object Flow Graph used.  We assume for the stated examples that Rascal is run from the Eclipse IDE. The second part consists of the rendering using GraphViz\\
 
 There are two ways of generating a dot file from an Eclipse project, one with an automated output to a file, while the other returns the dot string on stdout. \\
 
@@ -112,47 +137,70 @@ This call will build the class diagram from the source code and output the dot f
 \bigskip
 
 {\tt buildForProject(|project://<PROJECT NAME>|, |file://<DOT FILE LOCATION>|)} \\
-%\end{lstlisting}
 This call will build the class diagram of the specified project and optionally save it to the specified file location. When the second parameter is not present, the toolkit will store the dot file in the home directory in a file called {\sc classDiagram.dot}\\
 
 From this dot file we can generate the human viewable class diagram using GraphViz using the following command: \\
-{\tt dot -T <FILE TYPE> <DOT FILE> -O <DESIRED FILE NAME>}
-Where the filetype is one of the \href{http://www.graphviz.org/doc/info/output.html}{many supported file types} by GraphViz. Note that other rendering programs might work too, but this is not guaranteed since we only used GraphViz and it is possible that there are minor inconsistencies in the parsing of the dot file, which produces unexpected results.
+{\tt dot -T <FILE TYPE> <DOT FILE> -o <DESIRED FILE NAME>}
+Where the filetype is one of the \href{http://www.graphviz.org/doc/info/output.html}{many supported file types} by GraphViz. Note that other rendering programs might work too, but this is not guaranteed since we only used GraphViz and it the existince of minor inconsistencies in the parsing of a dot file is possible, which could produce unexpected results.
 
 
 \section{Toolchain application}
 \label{sec:toolapplication}
-aaa
-
-
 
 \subsection{eLib}
 \label{sec:elib}
-aaa
+The class diagram generated by our toolchain for the eLib source files can be seen in Appendix \ref{appendix:eLibDiagram}. Looking at the class diagram of the book by Tonella and Potrich\cite{book:book} we see many similarities, but also some differences. Everything except the dependency between Journal and User are present and we have got a class more. But since this class is present in our source-code it is no surprise that this class is present. \\
+
+Visually the diagram looks fine, we experimented with different edge styles, but that unfortunately was not successful since it in some cases greatly diminished the clarity of the diagram. Since we are mostly dependent on the choices of the rendering program we tried making it the best we could. We chose specifically not to use a monospaced font, since the clarity of the text was more important to us, than the (for example) the constant width for the field/method modifiers. \\
+
+We did however decide to adopt the industry standard and list constructors first and group methods and modifiers together, assuming that in this grouping the prefixing of the fields/methods is similar we did this by sorting the fields and methods alphabetically by method/field-name.
 
 \subsection{CyberNeko}
 \label{sec:cyberneko}
-aaa
+Since the UML class diagrams generated for the CyberNeko sources are very big, they can best be viewed on a computer, but for completeness we added them as appendices \cite{appendix:neko0} and \cite{appendix:neko1} for versions 0.9.5 and 1.9.21 respectably.  Running our toolset on these sources worked flawlessly and did not require any changes to the source code of any version of CyberNeko.
 
 \subsubsection{CyberNeko 0.9.5}
 \label{sec:cyberneko095}
-aaa
+Looking at the generated class diagram for this version we immediately see that many classes are a generalisation of {\sc DefaultFilter}. Not very many dependencies and even fewer associations exist between classes and finally, we cannot find a single realization in the generated class diagram. \\
+
+This usually means that there are many distinct parts which work very independently from each other. 
 
 \subsubsection{CyberNeko 1.9.21}
 \label{sec:cyberneko1921}
-aaa
+The newer version of the source shows the same basic principles, which makes sense since the it is the same project. However, some more associations and realisations have been added which indicates a more thoroughly thought plan.
 
 \subsection{Comparison of the CyberNeko versions}
 \label{sec:comparison}
-aaa
+For the most part we see that the classes that were present in the old version have not changed that much compared to the new version. The biggest differences are in the classes related to the actual elements. More relations are present and even better the relations appear to make sense too. One would think that both versions relied more heavily on implementing interfaces since many parts of the code do seem to need a certain (consistent) structure. Looking at the source code and searching through the source files we indeed find many references to the implementation of interfaces, but these are standard Java interfaces which are filtered from out UML diagram since only relations where both start and endpoint are classes within our project are shown. \\
+
+All in all we see that although the tool has progressed with regards to the actual structure; only the newer parts have been ``upraded'' we can clearly see that many of the classes with weak links ({\sc SpecialScanner, ElementList, ObjectFactory,} etc) still are very weakly linked (if at all) to other parts of the source code. While classes like {\sc HTMLTagBalancer} have grown in importance over the seven years difference between the compared versions. \\
+
+When looking at the CyberNeko email lists we see the same trend. A few classes are mentioned many times (like {\sc HTMLTagBalancer}) while others (like {\sc SpecialScanner}) are mention only a handful of times. Even though only the developer list was very usefull, it still makes us suspect that the creators have started working on the ``newer'' and part of the system while forgetting about the older parts they had previously written, for quite some time. We therefore think these older parts are not used and might contain dead code. But since we do not know the full extend of the plan, we cannot conclude that the code is superfluous. It might be preliminary work done for some future part of the system, although that explanation seems far-fetched for an open-source project with the size of CyberNeko which usually does not have this kind of foresight. \\
+
+Unfortunately due to the way we rendered the diagrams we got very wide diagrams which are very tough to read and display on standard sized piece of paper. This can be remedied using some more of the standard programs available through GraphViz, but we decided this was out of the scope of this paper.
 
 \section{Discussion}
 \label{sec:discussion}
-aaa
+We will now discuss our tool with respect to quality of the output, quality of the visualisation and performance.
+
+\subsection{Quality of the output}
+We used the eLib example to check whether our tool generated desired results since we could compare it to a different UML class diagram of the same software. Except some discrepancies our toolchain performed well and displayed (almost) everything which it needed to show. It left out an edge, but we have not yet been able to determine why this edge is supposed to be added.
+
+\subsection{Quality of the visualisation}
+The visualization itself was not so great. Since we had many classes in the CyberNeko study which were very loosely connected (if at all) and were therefore rendered in such a way that the UML class diagram became very wide. This is partly due to how GraphViz renders, but also partly to our design choices. If we had implemented packages then GraphViz would have had a way to group many of these classes in such a way that the width of the UML class diagram would have been lower. \\
+
+This does however not mean that the visualisation was incorrect, just that it could have been better and therefore we are still pleased with the end result.
+
+\subsection{Performance of the toolchain}
+Even though that we can generate the UML class diagrams in a reliable manner, the speed of the toolchain is a drawback. The rendering of the dot files takes only a few seconds at most, but the building of the dot files however can quite a long time and increases with the size and complexity of the source-files which are analysed. eLib - for instance - is a only 96KB and takes seconds to compute. While both CyberNeko versions are much bigger, 488KB and 532KB for the 0.9.5 and 1.9.21 versions respectively and take much longer. This is even excluding all external libraries which also have been taken into account when computing. Since then the sizes are 548KB and 11.5MB for the 0.9.5 and 1.9.21 versions respectively.\\
+
+We expected a near linear increase of computing time from smaller programs to bigger programs, but could not measure this reliable due to some unknown factor. The measured comutation times for the 0.9.5 version of CyberNeko varied from around 10 seconds to around 40 seconds without any apparent reason. Rascal is reported to be slow, which we also noticed during development, but was not a big hindrance, but might partly explain the length of the computation time.
+
 
 \section{Conclusion}
 \label{sec:conclusion}
-aaa
+Using tools like ours has once more proven that reverse engineering from source code can greatly help to see the big picture with respect to the direction the software has taken and probably will take; from a software evolution perspective. The toolchain developed performed admirably, it is not yet perfect but it gets the job done. We have used it to construct UML class diagrams for 2 different sources of software. From the generated UML class diagrams we managed to gather some useful information about the evolution of one of the sources. Some of the evolutionary changes have also been found to carry root in the real world. Signifying that they did not occur (purely) by chance, but were actually desired. Only speed is the major hindrance in doing more comparison work especially for larger projects since the computation time increases quite dramatically with increase in source-code.
+
 
 \begin{thebibliography}{9}
 \bibitem{url:rascal}
@@ -165,6 +213,36 @@ aaa
  CyberNeko. CyberNeko HTML Parser. Available: \url{http://sourceforge.net/projects/nekohtml/}
 \bibitem{url:rascalofg}
  CWI Software Analysis and Transformation. Rascal-OFG. Available: \url{https://github.com/cwi-swat/rascal-OFG}
-
+\bibitem{url:jurgen}
+ Jurgen Vinju. Example code to compute flow graphs for Java. Available: \url{https://gist.github.com/jurgenvinju/8972255}
+ \bibitem{url:slideset}
+ Alexander Serebrenik. 2IS55 - Architecture reconstruction (reverse engineering) of structural UML models. Available: \url{http://www.win.tue.nl/~aserebre/2IS55/2014-2015/3.pdf}
+\bibitem{book:book}
+  F. Fabbrini, M. Fusani, S. Gnesi, G. Lami, ``The Linguistic Approach to the Natural Language Requirements Quality: Benefits of the use of an Automatic Tool. 26th Annual IEEE Computer Society'', Greenbelt, MA, USA 27-29 November, 2001. A
 \end{thebibliography}
+
+\newpage
+\begin{appendices}
+\section{eLib class diagram} \label{appendix:eLibDiagram}
+\begin{figure}[h]
+	\includegraphics[scale=0.4]{rendered/eLib.pdf}
+	\caption{eLib class diagram}
+\end{figure}
+\newpage
+\section{CyberNeko-0.9.5 class diagram} \label{appendix:neko0}
+\begin{figure}[h]
+	\includegraphics[scale=0.046, angle=90]{rendered/nekohtml-095.pdf}
+	\centering
+	\caption{CyberNeko 0.9.5 class diagram}
+\end{figure}
+\newpage
+\section{CyberNeko-1.9.21 class diagram} \label{appendix:neko1}
+\begin{figure}[h]
+	\includegraphics[scale=0.033, angle=90]{rendered/nekohtml-1921.pdf}
+	\centering
+	\caption{CyberNeko 1.9.21 class diagram}
+\end{figure}
+\end{appendices}
+
+
 \end{document}

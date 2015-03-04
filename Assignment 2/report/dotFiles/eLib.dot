@@ -1,0 +1,51 @@
+digraph classes {
+  fontname = "Bitstream Vera Sans"
+  fontsize = 8
+  node [ fontname = "Bitstream Vera Sans" fontsize = 8 shape = "record" ]
+  edge [ fontname = "Bitstream Vera Sans" fontsize = 8 ]Main [
+label = "{Main|_lib_ : Library\l|+ _addBook_(cmd: String) : void\l+ _addJournal_(cmd: String) : void\l+ _addReport_(cmd: String) : void\l+ _addUser_(cmd: String) : void\l+ _addintUser_(cmd: String) : void\l+ _borrowDoc_(cmd: String) : void\l+ _dispatchCommand_(cmd: String) : void\l+ _getArgs_(cmd: String) : array[1](String)\l+ _isHolding_(cmd: String) : void\l+ _main_(arg: String) : void\l+ _printDoc_(cmd: String) : void\l+ _printHeader_() : void\l+ _printUser_(cmd: String) : void\l+ _returnDoc_(cmd: String) : void\l+ _rmDoc_(cmd: String) : void\l+ _rmUser_(cmd: String) : void\l+ _searchDoc_(cmd: String) : void\l+ _searchUser_(cmd: String) : void\l}"
+]
+Journal [
+label = "{Journal||Const Journal(tit: String)\l+ authorizedLoan(user: User) : boolean\l}"
+]
+Library [
+label = "{Library|MAX_NUMBER_OF_LOANS : int\ldocuments : Map\lloans : Collection\lusers : Map\l|+ addDocument(doc: Document) : boolean\l -  addLoan(loan: Loan) : void\l+ addUser(user: User) : boolean\l+ borrowDocument(doc: Document, user: User) : boolean\l+ getDocument(docCode: int) : Document\l+ getUser(userCode: int) : User\l+ isHolding(doc: Document, user: User) : boolean\l+ printAllLoans() : void\l+ printDocumentInfo(doc: Document) : void\l+ printUserInfo(user: User) : void\l+ removeDocument(docCode: int) : boolean\l -  removeLoan(loan: Loan) : void\l+ removeUser(userCode: int) : boolean\l+ returnDocument(doc: Document) : boolean\l+ searchDocumentByAuthors(authors: String) : List\l+ searchDocumentByISBN(isbn: String) : int\l+ searchDocumentByTitle(title: String) : List\l+ searchUser(name: String) : List\l}"
+]
+Document [
+label = "{Document|ISBNCode : String\lauthors : String\ldocumentCode : int\lloan : Loan\l_nextDocumentCodeAvailable_ : int\ltitle : String\l|Const Document(tit: String)\l+ addLoan(ln: Loan) : void\l+ authorizedLoan(user: User) : boolean\l+ equals(obj: object) : boolean\l+ getAuthors() : String\l+ getBorrower() : User\l+ getCode() : int\l+ getISBN() : String\l+ getTitle() : String\l+ isAvailable() : boolean\l+ isOut() : boolean\l# printAuthors() : void\l# printAvailability() : void\l# printGeneralInfo() : void\l# printHeader() : void\l+ printInfo() : void\l+ removeLoan() : void\l}"
+]
+TechnicalReport [
+label = "{TechnicalReport|refNo : String\l|Const TechnicalReport(ref: String, tit: String, auth: String)\l+ authorizedLoan(user: User) : boolean\l+ getRefNo() : String\l+ printInfo() : void\l# printRefNo() : void\l}"
+]
+Loan [
+label = "{Loan|document : Document\luser : User\l|Const Loan(usr: User, doc: Document)\l+ equals(obj: object) : boolean\l+ getDocument() : Document\l+ getUser() : User\l+ print() : void\l}"
+]
+User [
+label = "{User|address : String\lfullName : String\lloans : Collection\l_nextUserCodeAvailable_ : int\lphoneNumber : String\luserCode : int\l|Const User(addr: String, phone: String, name: String)\l+ addLoan(loan: Loan) : void\l+ authorizedUser() : boolean\l+ equals(obj: object) : boolean\l+ getAddress() : String\l+ getCode() : int\l+ getName() : String\l+ getPhone() : String\l+ numberOfLoans() : int\l+ printInfo() : void\l+ removeLoan(loan: Loan) : void\l}"
+]
+Book [
+label = "{Book||Const Book(isbn: String, tit: String, auth: String)\l+ printInfo() : void\l}"
+]
+InternalUser [
+label = "{InternalUser|internalld : String\l|Const InternalUser(phone: String, id: String, name: String, addr: String)\l+ authorizedUser() : boolean\l}"
+]
+edge[arrowhead = "empty"; style= "solid"]
+InternalUser -> User;
+Book -> Document;
+TechnicalReport -> Document;
+Journal -> Document;
+edge[arrowhead = "empty"; style = "dashed"]
+edge[arrowhead = "open"; style = "solid"]
+Loan -> Document;
+Loan -> User;
+User -> Loan;
+Library -> Document;
+Library -> Loan;
+Document -> Loan;
+Library -> User;
+edge[arrowhead = "open"; style = "dashed"]
+User -> Document;
+Main -> User;
+Main -> Document;
+Document -> User;
+}
