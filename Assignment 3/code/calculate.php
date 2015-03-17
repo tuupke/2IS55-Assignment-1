@@ -11,8 +11,10 @@ for($from = $argv[0]; $from < $argv[1]; $from++) {
 
     preg_match_all("/[0-9]*/", $file, $matches);
 
-    `/home/ubuntu/ccfinder-src/ubuntu32/ccfx m ccfxreturn/$file.ccfxd -w -o metrics/$file.tsv`;
-    $cij = array_sum(explode("\n", `cat metrics/$file.tsv | awk 'NR>1 {print $4}'`));
+    echo "$file\n";
+
+    `/home/ubuntu/ccfinder-src/ubuntu32/ccfx m ccfxreturn/$file -w -o metrics/$file`;
+    $cij = array_sum(explode("\n", `cat metrics/$file | awk 'NR>1 {print $4}'`));
 
     $i = $matches[0][0];
     $j = $matches[0][2];

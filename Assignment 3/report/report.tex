@@ -87,17 +87,45 @@ The workload was quite high and the computing power nowadays is quite high, ther
 
 Since the multithreading support for CCFinder is lacking, we decided to do the multithreading ourselves using our scripts. Firstly we started by making multiple copies of the source code. Making sure that we have a unique copy available for each script executing part of the workload makes sure that they do not interfere when working on the source files. Since the comparison of versions is symmetric, we do not need to check version $A$ to $B$ and version $B$ to $A$. This unfortunately means that we cannot trivially divide up the workload but need to do some computations. Since the fourth version needs to be compared to $n-4-1$ versions, while the second to last version only needs to be compared to a single other version. \\
 
-We solved this problem by checking the amount of work needed and divide it by the number of desired compute threads. Then through an iterative process we determine the start and end for each compute thread and start them. Since after preprocessing we are left with a list of files we are now able to easily split the work. All the scripts except one have been written in {\sc PHP}\cite{url:php}, the single script written in . \\
+We solved this problem by checking the amount of work needed and divide it by the number of desired compute threads. Then through an iterative process we determine the start and end for each compute thread and start them. Since after preprocessing we are left with a list of files we are now able to easily split the work. 
 
 Since there were some minor issues with an invisible character in a file called {\sc FileHandler.java} which is contained in many versions of \av we simply opened all of them and saved them using a simple text editor in order to remedy this issue. \\
 
-There are five scripts in total, only a single one of these is used to do an automated devision of labour, since the other cases are more trivial. These are listed in Appendix \ref{app:scripts}. The workings of the computation scripts are listed below and are grouped to the .
+There are six scripts in total, only three of which are used for computation on the source code using {\sc CCFinder}, while the other 3 are used as helper scripts or to parse a generated file. All scripts are listed in Appendix \ref{app:scripts}. The workings of the computation scripts are listed below and are grouped to the appropriate step. The scripts have mostly been written in {\sc PHP}\cite{url:php}, only a single script was written in the Bash\cite{url:bash} scripting language. \\
 
 \subsection{Precompute}
+The scripts used to execute the precompute step are {\sc devideThing.php}, listing \ref{lst:devideThing} and {\sc exec.php}, listing \ref{lst:exec}. {\sc devideThing.php} devides up the work and starts multiple instances of {\sc exec.php} which starts preprocessing the source by using the following command: \\
+
+\noindent\texttt{/home/ubuntu/ccfinder-src/ubuntu32/ccfx d java -b 50 -dn <$V_a$> -is -dn <$V_b$> -w f-w-g+ -o logs/<$V_a$>-<$V_b$>} \\
+
+It precomputes everything for the pair $(V_a,V_b)$ and stores it in a log folder. Since all source folders are distinct for each compute thread, they will not interfere. Furthermore all compute threads operate on a different set of versions so they will not interfere by writing to the logs folder. In the paper the token size is set to 50, which we have implemented too, as can be seen by the \texttt{-b 50} flag.
 
 \subsection{Code duplication detection}
+The code duplication calculation is done through {\sc analyze.php}, listing \ref{lst:analyze} and {\sc calculate.php}, listing \ref{lst:calculate}. Since we now have a single folder containing all files we need to compute we decided to not implement a scheduling script, but simply start the separate versions by hand. \\
+
+Firstly we start by analyzing the precomputed files and filter them (through {\sc analyze.php}). Which generates some metrics over all precomputes files, using the {\sc picosel} tool then selects all files with the appropriate RNR values (as is described in Livrieri et al.) and lastly does a filter step on all the precomputed files, which are used in the duplication detection step. The calls that are executed are: \\
+
+\noindent\texttt{/home/ubuntu/ccfinder-src/ubuntu32/ccfx m logs/$<F>$ -c -o analysis/$<F>$ \\
+/home/ubuntu/ccfinder-src/ubuntu32/picosel -o filter/$<F>$ from analysis/$<F>$ select CID where RNR .ge. 0.5 \\
+/home/ubuntu/ccfinder-src/ubuntu32/ccfx s logs/$<F>$ -o ccfxreturn/$<F>$ -ci filter/$<F>$ \\}
+
+With $<F>$ being one of the files from the log folder.
+
+The actual computation step is done in {\sc calculate.php} and calculates the code duplication which is output in csv format. It first starts by computing the lines of duplicated code the filtered files, then using {\sc awk} to select the appropriate column of the generated file and sum everything using PHP. We did not use PHP to select the column, since we could easily do it through {\sc awk} and have an extra file to check correctness. The executed command to generate the metric file is: \\
+
+\noindent\texttt{/home/ubuntu/ccfinder-src/ubuntu32/ccfx m ccfxreturn/$<F>$ -w -o metrics/$<F>$} \\
+
+While the {\sc awk} call is: \texttt{cat metrics/$<F>$ | awk 'NR>1 {print \$4}'))}. In both cases $<F>$ points to a single file from the logs folder. The output of {\sc calculate.php} has to be stored as a csv file, which can be easily aggregated into the total csv file used for computing the heatmap.\\
+
+In the calculation step, the lines of code for each version is used. {\sc calculate.php} can access this value through a file stored in a source folder. These files are generated using {\sc calcLoc.sh}, listing \ref{lst:calcloc}. This simply calculates the lines of code for all java files by executing the following command for every version folder in the main source folder: \\
+
+\noindent\texttt{find $<F>$ | grep "\.java" | grep -v "ccfx" | xargs cat | wc -l > $<F>$.loc} \\
+
+Since we are possibly also selecting the files precomputed by {\sc CCFinder} we filter them out of the returned file list.
 
 \subsection{Cleanup \& parsing}
+After combining all the output generated by {\sc calculate.php} we have to parse it into the actual heatmap. We could do this by hand, but this is a tedious and error prone procedure. Therefore we solve this issue by parsing it in an automated way. {\sc parse.php} takes the generated input file, sorts all the values into the correct order for easy output, and then output the heatmap in csv format. Opening the file in {\sc Excel} (2010) and using the default function ``Conditional Formatting'' will give us the generated heatmap after some minor clean-up work. We hide all the computed values and rotate the bottom row vertically in order to improve readability.
+
 
 
 \section{CCFinder discussion}
@@ -132,7 +160,7 @@ When two pieces of software implement the same concepts but in a different manne
 
 The current stable version of {\sc Vuze} is 5.6.0.0 (March 3$^{\text{rd}}$ 2015) containing a total of 941.461 lines of (Java) code for a total size of 42MB. While the oldest version available to us (2.0.0.8) has 68.664 lines of (Java) code for a total size of 1.4MB. \\
 
-We set the goal to analyse all 79 versions of {\sc Azureus-Vuze} available to us, but due to a mistake of the scheduling script, we only managed 75 versions unfortunately we did not have enough time after the detection to compute the required values for the remaining four versions. The versions that were tested are: \\
+We set the goal to analyse all 79 versions of {\sc Azureus-Vuze} available to us, but due to a mistake in the scheduling script and another error in the manual fix, we only managed 75 versions. Unfortunately we did not have enough time after the detection to compute the required values for the remaining four versions. The versions that were tested are: \\
 
 \begin{tabular}{cccccccccccc}
 2008 & 2010 & 2025 & 2026 & 2027 & 2030 & 2032 & 2040 & 2042 & 2060 & 2070 & 2080 \\
@@ -145,11 +173,7 @@ We set the goal to analyse all 79 versions of {\sc Azureus-Vuze} available to us
 \end{tabular}
 
 
-\section{Heat map}
-\label{sec:heatmap}
-The generated heatmap can be seen in figure \ref{fig:heatmap}. Green indicates low code duplication while red indicates high code duplication. \\
 
-As we can see the code duplication increases as the version increases since the code keeps growing and old (reliable/correct) code does not change any more. Furthermore we can clearly see that between 2 sequential versions the code duplication is high, which makes sense since the differences between these versions should be small.
 \begin{figure}[!h]
 \includegraphics[scale=0.8]{../results/heatMap.pdf}
 \caption{The heatmap of all checked versions of \av}
@@ -158,6 +182,11 @@ As we can see the code duplication increases as the version increases since the 
 
 \section{Discussion of evulution}
 \label{sec:discussion}
+
+The generated heatmap can be seen in figure \ref{fig:heatmap}. Green indicates low code duplication while red indicates high code duplication. \\
+
+As we can see the code duplication increases as the version increases since the code keeps growing and old (reliable/correct) code does not change any more. Furthermore we can clearly see that between 2 sequential versions the code duplication is high, which makes sense since the differences between these versions should be small. \\
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel enim in felis vehicula rutrum dictum sodales nibh. Pellentesque tempor metus nibh, eu gravida tellus auctor eu. Nunc et lorem sem. Suspendisse dui risus, fringilla ut ante a, pretium pretium dolor. Vivamus non ipsum a justo laoreet rutrum ut eu ipsum. Nulla tempor sed metus ornare faucibus. Pellentesque tincidunt interdum viverra.
 
 Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis tellus libero, blandit quis volutpat et, rutrum molestie lectus. Cras vitae consequat sem. Nullam sit amet urna ac diam accumsan accumsan sed vel risus. Cras sem ante, mattis id erat vel, auctor finibus ante. Proin posuere massa auctor nulla rhoncus laoreet. Praesent egestas placerat accumsan. Pellentesque pellentesque orci massa. Fusce eu tristique justo, a ornare est. Integer eget metus metus. Aliquam quis sem id eros facilisis fermentum. Suspendisse malesuada sodales orci tristique tincidunt. Vestibulum ac nulla quis augue venenatis volutpat et in turpis.
@@ -169,6 +198,7 @@ Duis aliquet libero a lacinia feugiat. Vivamus blandit urna id neque sollicitudi
 Etiam luctus sit amet diam a iaculis. Nulla luctus nunc id lorem cursus, fermentum euismod orci luctus. Curabitur et eleifend est. Aliquam eu risus facilisis felis lacinia porttitor eget ac dui. Suspendisse eleifend ultrices lacus, eget ornare risus laoreet et. Ut nibh mauris, rhoncus sed lobortis at, interdum ut nulla. In accumsan, ligula vitae porttitor congue, ante diam dictum nisi, eget mattis lacus metus eget ex. Praesent id tortor purus. Praesent commodo lorem ipsum, ut sodales ipsum mattis ut. Morbi sed cursus sem.
 
 
+\newpage
 \begin{thebibliography}{9}
 \bibitem{pap:liveiri}
 Simone Livieri, Yoshiki Higo, Makoto Matsushita, and Katsuro Inoue. ``Analysis of the Linux Kernel Evolution Using Code Clone Coverage'' Proceedings of the Fourth International Workshop on Mining Software Repositories,  pp. 22-1 22-4, Washington, DC, USA, 2007.
@@ -178,8 +208,12 @@ Toshihiro Kamiya, Fumiaki Ohata, Kazuhiro Kondou, Shinji Kusumoto, and Katuro In
 
 \bibitem{url:php}
 Zend. PHP - PHP: Hypertext Preprocessor. Available: \url{http://php.net/}
+
 \bibitem{url:ccfinder}
 Toshihiro Kamiya. CCFinder a code-clone detector. Available: \url{http://www.ccfinder.net/}
+
+\bibitem{url:bash}
+GNU. GNU Bash - Bourne Again SHell. Available: \url{http://www.gnu.org/software/bash/}  
 
 \end{thebibliography}
 
